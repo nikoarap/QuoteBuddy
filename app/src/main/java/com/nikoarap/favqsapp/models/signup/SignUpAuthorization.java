@@ -22,7 +22,7 @@ public class SignUpAuthorization implements Parcelable {
     private String message;
 
 
-    protected SignUpAuthorization(Parcel in) {
+    private SignUpAuthorization(Parcel in) {
         token = in.readString();
         login = in.readString();
         if (in.readByte() == 0) {
@@ -49,10 +49,6 @@ public class SignUpAuthorization implements Parcelable {
         return token;
     }
 
-    public void setToken(String token) {
-        this.token = token;
-    }
-
     public String getLogin() {
         return login;
     }
@@ -65,18 +61,9 @@ public class SignUpAuthorization implements Parcelable {
         return error_code;
     }
 
-    public void setError_code(Integer error_code) {
-        this.error_code = error_code;
-    }
-
     public String getMessage() {
         return message;
     }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
 
     @Override
     public int describeContents() {

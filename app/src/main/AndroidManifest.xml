@@ -47,17 +47,6 @@
         </activity>
 
         <activity
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
-            android:name=".ui.UserActivity"
-            android:launchMode="singleTop"
-            android:windowSoftInputMode="stateHidden|adjustResize">
-            <intent-filter>
-                <action android:name="android.intent.action.USER" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-
-        <activity
             android:name=".ui.UserMenuActivity"
             android:launchMode="singleTop"
             android:windowSoftInputMode="stateHidden|adjustResize">

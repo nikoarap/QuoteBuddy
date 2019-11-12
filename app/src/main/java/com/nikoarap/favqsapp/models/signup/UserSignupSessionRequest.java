@@ -5,6 +5,8 @@ import android.os.Parcelable;
 
 import com.google.gson.annotations.SerializedName;
 
+import org.jetbrains.annotations.NotNull;
+
 public class UserSignupSessionRequest implements Parcelable {
 
     @SerializedName("user")
@@ -14,7 +16,7 @@ public class UserSignupSessionRequest implements Parcelable {
         this.user = user;
     }
 
-    protected UserSignupSessionRequest(Parcel in) {
+    private UserSignupSessionRequest(Parcel in) {
         user = in.readParcelable(User.class.getClassLoader());
     }
 
@@ -30,17 +32,7 @@ public class UserSignupSessionRequest implements Parcelable {
         }
     };
 
-
-    public User getUser ()
-    {
-        return user;
-    }
-
-    public void setUser (User user)
-    {
-        this.user = user;
-    }
-
+    @NotNull
     @Override
     public String toString()
     {

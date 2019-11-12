@@ -5,6 +5,11 @@ import android.os.Parcelable;
 
 import com.google.gson.annotations.SerializedName;
 
+import org.jetbrains.annotations.NotNull;
+
+import java.util.Arrays;
+import java.util.Objects;
+
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
@@ -62,7 +67,7 @@ public class Quotes implements Parcelable {
     private String downvotes_count;
 
     public Quotes(String _private, String favorites_count, String author, String dialogue,
-                  String upvotes_count, String author_permalink, String id, String body, String url,
+                  String upvotes_count, String author_permalink, @NotNull String id, String body, String url,
                   String[] tags, String downvotes_count) {
         this._private = _private;
         this.favorites_count = favorites_count;
@@ -84,7 +89,7 @@ public class Quotes implements Parcelable {
         dialogue = in.readString();
         upvotes_count = in.readString();
         author_permalink = in.readString();
-        id = in.readString();
+        id = Objects.requireNonNull(in.readString());
         body = in.readString();
         url = in.readString();
         tags = in.createStringArray();
@@ -118,19 +123,9 @@ public class Quotes implements Parcelable {
         return favorites_count;
     }
 
-    public void setFavorites_count (String favorites_count)
-    {
-        this.favorites_count = favorites_count;
-    }
-
     public String getAuthor ()
     {
         return author;
-    }
-
-    public void setAuthor (String author)
-    {
-        this.author = author;
     }
 
     public String getDialogue ()
@@ -138,19 +133,9 @@ public class Quotes implements Parcelable {
         return dialogue;
     }
 
-    public void setDialogue (String dialogue)
-    {
-        this.dialogue = dialogue;
-    }
-
     public String getUpvotes_count ()
     {
         return upvotes_count;
-    }
-
-    public void setUpvotes_count (String upvotes_count)
-    {
-        this.upvotes_count = upvotes_count;
     }
 
     public String getAuthor_permalink ()
@@ -158,17 +143,13 @@ public class Quotes implements Parcelable {
         return author_permalink;
     }
 
-    public void setAuthor_permalink (String author_permalink)
-    {
-        this.author_permalink = author_permalink;
-    }
-
+    @NotNull
     public String getId ()
     {
         return id;
     }
 
-    public void setId (String id)
+    public void setId (@NotNull String id)
     {
         this.id = id;
     }
@@ -188,19 +169,9 @@ public class Quotes implements Parcelable {
         return url;
     }
 
-    public void setUrl (String url)
-    {
-        this.url = url;
-    }
-
     public String[] getTags ()
     {
         return tags;
-    }
-
-    public void setTags (String[] tags)
-    {
-        this.tags = tags;
     }
 
     public String getDownvotes_count ()
@@ -208,15 +179,13 @@ public class Quotes implements Parcelable {
         return downvotes_count;
     }
 
-    public void setDownvotes_count (String downvotes_count)
-    {
-        this.downvotes_count = downvotes_count;
-    }
-
+    @NotNull
     @Override
     public String toString()
     {
-        return "ClassPojo [private = "+_private+", favorites_count = "+favorites_count+", author = "+author+", dialogue = "+dialogue+", upvotes_count = "+upvotes_count+", author_permalink = "+author_permalink+", id = "+id+", body = "+body+", url = "+url+", tags = "+tags+", downvotes_count = "+downvotes_count+"]";
+        return "ClassPojo [private = "+_private+", favorites_count = "+favorites_count+", author = "+author+", " +
+                "dialogue = "+dialogue+", upvotes_count = "+upvotes_count+", author_permalink = "+author_permalink+", " +
+                "id = "+id+", body = "+body+", url = "+url+", tags = "+ Arrays.toString(tags) +", downvotes_count = "+downvotes_count+"]";
     }
 
     @Override

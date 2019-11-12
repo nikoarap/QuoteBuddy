@@ -28,13 +28,6 @@ public class SignupActivity extends AppCompatActivity {
 
     public static final String TAG = "SignupActivity";
     private int backButtonCount=0;
-    private static String name;
-    private static String email;
-    private static String password;
-    private User user;
-    private UserSignupSessionRequest sr;
-    private static String tokenResponse;
-    private static String loginResponse;
 
     @BindView(R.id.input_name) EditText nameText;
     @BindView(R.id.input_email) EditText emailText;
@@ -59,7 +52,7 @@ public class SignupActivity extends AppCompatActivity {
     public void signup() {
 
         if (!validate()) {
-            onSignupFailed();
+
             return;
         }
 
@@ -71,15 +64,15 @@ public class SignupActivity extends AppCompatActivity {
         progressDialog.setMessage("Creating Account...");
         progressDialog.show();
 
-        name = nameText.getText().toString();
-        email = emailText.getText().toString();
-        password = passwordText.getText().toString();
+        String name = nameText.getText().toString();
+        String email = emailText.getText().toString();
+        String password = passwordText.getText().toString();
 
         FetchJSONDataAPI service = RetrofitRequestClass.fetchApi();
-        service.signUpAccount(sr = new UserSignupSessionRequest(user = new User(name,email,password))).enqueue(new Callback<SignUpAuthorization>() {
+        service.signUpAccount(new UserSignupSessionRequest(new User(name, email, password))).enqueue(new Callback<SignUpAuthorization>() {
             @Override
             public void onResponse(@NonNull Call<SignUpAuthorization> call, @NonNull Response<SignUpAuthorization> response) {
-
+                assert response.body() != null;
                 if(response.body().getError_code() !=null){
                     onSignupFailed();
                     progressDialog.dismiss();
@@ -89,12 +82,9 @@ public class SignupActivity extends AppCompatActivity {
                     Log.i(TAG, "onResponse: " + response.body().getLogin());
                     Log.i(TAG, "onResponse: " + response.body().getError_code());
                     Log.i(TAG, "onResponse: " + response.body().getMessage());
-                    tokenResponse = response.body().getToken();
-                    loginResponse = response.body().getLogin();
 
                     onSignupSuccess();
                     progressDialog.dismiss();
-
                 }
             }
 
@@ -105,10 +95,7 @@ public class SignupActivity extends AppCompatActivity {
                 onSignupFailed();
             }
         });
-
-
     }
-
 
     public void onSignupSuccess() {
         signupButton.setEnabled(true);
@@ -119,7 +106,7 @@ public class SignupActivity extends AppCompatActivity {
     }
 
     public void onSignupFailed() {
-        Toast.makeText(SignupActivity.this, "Sign Up failed", Toast.LENGTH_LONG).show();
+        Toast.makeText(SignupActivity.this, "Username or Email already exist", Toast.LENGTH_LONG).show();
         signupButton.setEnabled(true);
     }
 
@@ -167,5 +154,4 @@ public class SignupActivity extends AppCompatActivity {
             backButtonCount++;
         }
     }
-
 }

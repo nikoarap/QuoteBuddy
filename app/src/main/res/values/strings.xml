@@ -4,4 +4,19 @@
     <string name="title_home">Home</string>
     <string name="title_favourites">Favourites</string>
     <string name="title_search">Search</string>
+    <string name="input_name">Name</string>
+    <string name="input_email">Email</string>
+    <string name="create_account">Create Account</string>
+    <string name="already_a_member_login">Already a member? Login</string>
+    <string name="password">Password</string>
+    <string name="quote_buddy">Quote Buddy</string>
+    <string name="image">image</string>
+    <string name="quote_buddy">Quote Buddy</string>
+    <string name="fav_this_quote">Fav This Quote</string>
+    <string name="tags">Tags:</string>
+    <string name="no_acc">No account yet? Sign Up</string>
+    <string name="login">Login</string>
+    <string name="password">Password</string>
+    <string name="username_or_email">Username or Email</string>
+    <string name="quote_buddy">Quote Buddy</string>
 </resources>

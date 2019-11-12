@@ -24,7 +24,7 @@ public class LoginAuthorization implements Parcelable {
     @SerializedName("message")
     private String message;
 
-    protected LoginAuthorization(Parcel in) {
+    private LoginAuthorization(Parcel in) {
         token = in.readString();
         login = in.readString();
         email = in.readString();
@@ -52,10 +52,6 @@ public class LoginAuthorization implements Parcelable {
         return token;
     }
 
-    public void setToken(String token) {
-        this.token = token;
-    }
-
     public String getLogin() {
         return login;
     }
@@ -68,24 +64,12 @@ public class LoginAuthorization implements Parcelable {
         return email;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
     public Integer getError_code() {
         return error_code;
     }
 
-    public void setError_code(Integer error_code) {
-        this.error_code = error_code;
-    }
-
     public String getMessage() {
         return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
     }
 
     @Override

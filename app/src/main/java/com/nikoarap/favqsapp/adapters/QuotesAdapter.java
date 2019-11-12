@@ -1,34 +1,25 @@
 package com.nikoarap.favqsapp.adapters;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.nikoarap.favqsapp.R;
 import com.nikoarap.favqsapp.models.Quotes;
 
-import java.util.List;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import de.hdodenhof.circleimageview.CircleImageView;
 
 public class QuotesAdapter extends RecyclerView.Adapter<QuotesAdapter.QuotesViewHolder> {
 
     private Quotes[] quotesList;
-    private Context context;
     private OnQuoteListener onQuoteListener;
     private static final String TAG = "AuthorsAdapter";
 
-    public QuotesAdapter(Context cont, Quotes[] quotesList, OnQuoteListener quoteListener) {
-        context = cont;
+    public QuotesAdapter(Quotes[] quotesList, OnQuoteListener quoteListener) {
         this.quotesList = quotesList;
         this.onQuoteListener = quoteListener;
     }

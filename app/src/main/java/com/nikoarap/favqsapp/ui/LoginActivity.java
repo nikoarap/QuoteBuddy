@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.util.Base64;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
@@ -33,14 +32,9 @@ public class LoginActivity extends AppCompatActivity {
 
     public static final String TAG = "LoginActivity";
     private int backButtonCount=0;
-    private static String email;
-    private static String password;
-    private User user;
-    private UserLoginSessionRequest sr;
     private static String tokenResponse;
     private static String loginResponse;
     private static String emailResponse;
-
 
     @BindView(R.id.input_email) EditText emailText;
     @BindView(R.id.input_password) EditText passwordText;
@@ -52,7 +46,6 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_activity_layout);
         ButterKnife.bind(this);
-
 
         loginButton.setOnClickListener(v -> login());
 
@@ -76,13 +69,14 @@ public class LoginActivity extends AppCompatActivity {
         progressDialog.setMessage("Authenticating...");
         progressDialog.show();
 
-        email = emailText.getText().toString();
-        password = passwordText.getText().toString();
+        String email = emailText.getText().toString();
+        String password = passwordText.getText().toString();
 
         FetchJSONDataAPI service = RetrofitRequestClass.fetchApi();
-        service.loginAccount(sr = new UserLoginSessionRequest(user = new User(email,password))).enqueue(new Callback<LoginAuthorization>() {
+        service.loginAccount(new UserLoginSessionRequest(new User(email, password))).enqueue(new Callback<LoginAuthorization>() {
             @Override
             public void onResponse(@NonNull Call<LoginAuthorization> call, @NonNull Response<LoginAuthorization> response) {
+                assert response.body() != null;
                 if(response.body().getError_code() !=null){
                     onLoginFailed();
                     progressDialog.dismiss();
@@ -101,9 +95,9 @@ public class LoginActivity extends AppCompatActivity {
                     prefEditor.putString("login", loginResponse);
                     prefEditor.putString("email", emailResponse);
                     prefEditor.apply();
+
                     onLoginSuccess();
                     progressDialog.dismiss();
-
                 }
             }
 
@@ -165,12 +159,4 @@ public class LoginActivity extends AppCompatActivity {
             backButtonCount++;
         }
     }
-
-
-    public static String getAuthorizationHeader(String email, String password) {
-        String credential = email + ":" + password;
-        return "Basic " + Base64.encodeToString(credential.getBytes(),  Base64.NO_WRAP);
-    }
-
-
 }

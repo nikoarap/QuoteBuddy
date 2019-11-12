@@ -10,7 +10,8 @@
     <ImageView android:src="@drawable/applogo"
         android:layout_width="wrap_content"
         android:layout_height="72dp"
-        android:layout_gravity="center_horizontal" />
+        android:layout_gravity="center_horizontal"
+        android:contentDescription="@string/image" />
 
     <TextView
         android:id="@+id/text1"
@@ -18,9 +19,9 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:fontFamily="cursive"
-        android:text="Quote Buddy"
+        android:text="@string/quote_buddy"
         android:textColor="@color/colorPrimaryDark"
-        android:textSize="27dp" />
+        android:textSize="27sp" />
 
     <TextView
         android:id="@+id/quoteText"
@@ -31,7 +32,7 @@
         android:gravity="center"
         android:layout_marginTop="70dp"
         android:textColor="@color/colorPrimaryDark"
-        android:textSize="16dp" />
+        android:textSize="16sp" />
 
     <TextView
         android:id="@+id/authorText"
@@ -42,6 +43,6 @@
         android:gravity="center"
         android:layout_marginTop="10dp"
         android:textColor="@color/colorPrimaryDark"
-        android:textSize="14dp" />
+        android:textSize="14sp" />
 
 </LinearLayout>

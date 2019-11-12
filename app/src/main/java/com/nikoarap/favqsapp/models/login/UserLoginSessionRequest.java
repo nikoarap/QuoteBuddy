@@ -14,16 +14,7 @@ public class UserLoginSessionRequest implements Parcelable {
         this.user = user;
     }
 
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-
-    public UserLoginSessionRequest(Parcel in) {
+    private UserLoginSessionRequest(Parcel in) {
         user = in.readParcelable(User.class.getClassLoader());
     }
 

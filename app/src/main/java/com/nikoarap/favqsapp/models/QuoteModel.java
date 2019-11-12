@@ -3,6 +3,10 @@ package com.nikoarap.favqsapp.models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import org.jetbrains.annotations.NotNull;
+
+import java.util.Arrays;
+
 public class QuoteModel implements Parcelable {
 
     private String last_page;
@@ -11,13 +15,7 @@ public class QuoteModel implements Parcelable {
 
     private Quotes[] quotes;
 
-    public QuoteModel(String last_page, String page, Quotes[] quotes) {
-        this.last_page = last_page;
-        this.page = page;
-        this.quotes = quotes;
-    }
-
-    protected QuoteModel(Parcel in) {
+    private QuoteModel(Parcel in) {
         last_page = in.readString();
         page = in.readString();
         quotes = in.createTypedArray(Quotes.CREATOR);
@@ -35,26 +33,6 @@ public class QuoteModel implements Parcelable {
         }
     };
 
-    public String getLast_page ()
-    {
-        return last_page;
-    }
-
-    public void setLast_page (String last_page)
-    {
-        this.last_page = last_page;
-    }
-
-    public String getPage ()
-    {
-        return page;
-    }
-
-    public void setPage (String page)
-    {
-        this.page = page;
-    }
-
     public Quotes[] getQuotes ()
     {
         return quotes;
@@ -65,10 +43,11 @@ public class QuoteModel implements Parcelable {
         this.quotes = quotes;
     }
 
+    @NotNull
     @Override
     public String toString()
     {
-        return "ClassPojo [last_page = "+last_page+", page = "+page+", quotes = "+quotes+"]";
+        return "ClassPojo [last_page = "+last_page+", page = "+page+", quotes = "+ Arrays.toString(quotes) +"]";
     }
 
     @Override

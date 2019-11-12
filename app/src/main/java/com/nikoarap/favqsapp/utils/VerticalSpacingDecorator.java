@@ -3,6 +3,8 @@ package com.nikoarap.favqsapp.utils;
 import android.graphics.Rect;
 import android.view.View;
 
+import org.jetbrains.annotations.NotNull;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -15,7 +17,7 @@ public class VerticalSpacingDecorator extends RecyclerView.ItemDecoration{
     }
 
     @Override
-    public void getItemOffsets(Rect outRect, @NonNull View view, RecyclerView parent, RecyclerView.State state) {
+    public void getItemOffsets(Rect outRect, @NonNull View view, @NotNull RecyclerView parent, @NotNull RecyclerView.State state) {
         outRect.bottom = verticalSpaceHeight;
     }
 }

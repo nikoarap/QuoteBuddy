@@ -1,9 +1,7 @@
 package com.nikoarap.favqsapp.ui;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -18,6 +16,7 @@ import com.nikoarap.favqsapp.utils.VerticalSpacingDecorator;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -26,21 +25,12 @@ import butterknife.ButterKnife;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.http.Query;
 
 public class AuthorActivity extends AppCompatActivity implements QuotesAdapter.OnQuoteListener{
 
     public static final String TAG = "AuthorActivity";
 
     private Quotes[] quotes;
-    private String quoteId;
-    private String quoteBody;
-    private String quoteAuthor;
-    private String quoteAuthorPerma;
-    private String quoteUpvotes;
-    private String quoteDownvotes;
-    private String[] quoteTags;
-    private String quoteFavCount;
     private String quoteAuthor_2;
 
     private RecyclerView recView;
@@ -54,32 +44,21 @@ public class AuthorActivity extends AppCompatActivity implements QuotesAdapter.O
         ButterKnife.bind(this);
 
         Intent i = getIntent();
-        quoteId = i.getStringExtra("quoteId");
-        quoteBody = i.getStringExtra("quoteBody");
-        quoteAuthor = i.getStringExtra("quoteAuthor");
-        quoteAuthorPerma = i.getStringExtra("quoteAuthorPerma");
-        quoteUpvotes = i.getStringExtra("quoteUpvotes");
-        quoteDownvotes = i.getStringExtra("quoteDownvotes");
-        quoteTags = i.getStringArrayExtra("guoteTags");
-        quoteFavCount = i.getStringExtra("quoteFavCount");
+        String quoteAuthor = i.getStringExtra("quoteAuthor");
 
         quoteAuthor_2 = quoteAuthor.replaceAll("\\s+","+");
 
         fetchQuoteList();
-
     }
 
     private void fetchQuoteList() {
         FetchJSONDataAPI service = RetrofitRequestClass.fetchApi();
-
-
-
         Call<QuoteModel> call = service.getQuotesByAuthor(quoteAuthor_2,"&","author");
         call.enqueue(new Callback<QuoteModel>() {
             @Override
-            public void onResponse(Call<QuoteModel> call, Response<QuoteModel> response) {
+            public void onResponse(@NotNull Call<QuoteModel> call, @NotNull Response<QuoteModel> response) {
                 if (response.body() != null) {
-                    String str = response.body().getQuotes().toString();
+                    String str = Arrays.toString(response.body().getQuotes());
                     Log.i(TAG, "onResponse: "+str);
                     QuoteModel quoteModel = response.body();
                     quoteModel.setQuotes(response.body().getQuotes());
@@ -87,14 +66,12 @@ public class AuthorActivity extends AppCompatActivity implements QuotesAdapter.O
                     for(Quotes quote: quotes){
                         populateRecyclerView(quotes);
                         quoteList.add(quote);
-
                     }
-
                 }
             }
 
             @Override
-            public void onFailure(Call<QuoteModel> call, @NotNull Throwable t) {
+            public void onFailure(@NotNull Call<QuoteModel> call, @NotNull Throwable t) {
                 Toast.makeText(AuthorActivity.this, "error" ,Toast.LENGTH_SHORT).show();
             }
         });
@@ -103,7 +80,7 @@ public class AuthorActivity extends AppCompatActivity implements QuotesAdapter.O
     private void populateRecyclerView(Quotes[] quoteList) {
         RecyclerView.LayoutManager linearLayoutManager = new LinearLayoutManager(this);
         recView.setLayoutManager(linearLayoutManager);
-        QuotesAdapter recAdapter = new QuotesAdapter(this, quoteList, this);
+        QuotesAdapter recAdapter = new QuotesAdapter(quoteList, this);
         VerticalSpacingDecorator itemDecorator = new VerticalSpacingDecorator(1);
         recView.addItemDecoration(itemDecorator);
         recView.setAdapter(recAdapter);

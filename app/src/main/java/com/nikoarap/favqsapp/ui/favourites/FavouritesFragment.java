@@ -6,13 +6,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
+
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -20,39 +17,32 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.nikoarap.favqsapp.AsyncTasks.DeleteFavQuoteAsyncTask;
 import com.nikoarap.favqsapp.R;
 import com.nikoarap.favqsapp.adapters.FavQuotesAdapter;
-import com.nikoarap.favqsapp.adapters.QuotesAdapter;
 import com.nikoarap.favqsapp.db.AppDao;
 import com.nikoarap.favqsapp.db.AppDatabase;
 import com.nikoarap.favqsapp.models.Quotes;
-import com.nikoarap.favqsapp.ui.QuoteActivity;
 import com.nikoarap.favqsapp.utils.VerticalSpacingDecorator;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class FavouritesFragment extends Fragment implements FavQuotesAdapter.OnQuoteListener {
 
-    public static final String TAG = "FavouritesFragment";
-
-    private Context context;
+    private static final String TAG = "FavouritesFragment";
     private AppDao appDao;
-    private AppDatabase appDatabase;
-
     private RecyclerView recView;
-    public ArrayList<Quotes> quotesList = new ArrayList<>();
-
-    private FavouritesViewModel dashboardViewModel;
+    private ArrayList<Quotes> quotesList = new ArrayList<>();
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        dashboardViewModel =
-                ViewModelProviders.of(this).get(FavouritesViewModel.class);
         View root = inflater.inflate(R.layout.fragment_favourites, container, false);
         recView = root.findViewById(R.id.quotesRecyclerView);
         recView.setNestedScrollingEnabled(false);
 
-        context = FavouritesFragment.this.getActivity();
-        appDatabase = AppDatabase.getInstance(context.getApplicationContext());
+        Context context = FavouritesFragment.this.getActivity();
+        assert context != null;
+        AppDatabase appDatabase = AppDatabase.getInstance(context.getApplicationContext());
         appDao = appDatabase.getAppDao();
 
         observeFromDb();
@@ -76,7 +66,7 @@ public class FavouritesFragment extends Fragment implements FavQuotesAdapter.OnQ
     private void populateRecyclerView(List<Quotes> quoteList) {
         RecyclerView.LayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         recView.setLayoutManager(linearLayoutManager);
-        FavQuotesAdapter recAdapter = new FavQuotesAdapter(getActivity(), quoteList, this);
+        FavQuotesAdapter recAdapter = new FavQuotesAdapter(quoteList, this);
         VerticalSpacingDecorator itemDecorator = new VerticalSpacingDecorator(1);
         recView.addItemDecoration(itemDecorator);
         new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(recView);
@@ -86,9 +76,9 @@ public class FavouritesFragment extends Fragment implements FavQuotesAdapter.OnQ
     }
 
     //delete quote by swiping to the right
-    ItemTouchHelper.SimpleCallback itemTouchHelperCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT) {
+    private ItemTouchHelper.SimpleCallback itemTouchHelperCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT) {
         @Override
-        public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
+        public boolean onMove(@NotNull RecyclerView recyclerView, @NotNull RecyclerView.ViewHolder viewHolder, @NotNull RecyclerView.ViewHolder target) {
             return false;
         }
 

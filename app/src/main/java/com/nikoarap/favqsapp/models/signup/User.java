@@ -5,6 +5,8 @@ import android.os.Parcelable;
 
 import com.google.gson.annotations.SerializedName;
 
+import org.jetbrains.annotations.NotNull;
+
 public class User implements Parcelable {
 
     @SerializedName("login")
@@ -22,6 +24,7 @@ public class User implements Parcelable {
         this.email = email;
     }
 
+    @NotNull
     @Override
     public String toString() {
         return "User{" +
@@ -31,7 +34,7 @@ public class User implements Parcelable {
                 '}';
     }
 
-    protected User(Parcel in) {
+    private User(Parcel in) {
         password = in.readString();
         login = in.readString();
         email = in.readString();
@@ -49,16 +52,6 @@ public class User implements Parcelable {
         }
     };
 
-    public String getPassword ()
-    {
-        return password;
-    }
-
-    public void setPassword (String password)
-    {
-        this.password = password;
-    }
-
     public String getLogin ()
     {
         return login;
@@ -68,17 +61,6 @@ public class User implements Parcelable {
     {
         this.login = login;
     }
-
-    public String getEmail ()
-    {
-        return email;
-    }
-
-    public void setEmail (String email)
-    {
-        this.email = email;
-    }
-
 
     @Override
     public int describeContents() {
