@@ -25,7 +25,7 @@ By clicking on a quote, you can browse its' contents and Fav/UnFav it.
 By clicking on the quote's Author, a list of quotes by this Author is presented.
 You can also click on each of this list quotes and see their content or add them to your favourites list.
 In the Favourites section, all the quotes Favourited by the user are present.
-You can remove a quote by the Favourites list by swiping right on it.
+You can remove a quote from the Favourites list by swiping right on it.
 
 ![](images/Screenshot_2019-11-12-17-53-10-867_com.nikoarap.favqsapp.png)
 ![](images/Screenshot_2019-11-12-17-53-32-504_com.nikoarap.favqsapp.png)
