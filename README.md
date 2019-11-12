@@ -10,4 +10,4 @@ App Functionalities & User Guide:
 
 
 
-❮img src="appimages/Screenshot_2019-11-12-17-51-33-702com.nikoarap.favqsapp.png"❯
+❮img src="images/Screenshot_2019-11-12-17-51-33-702com.nikoarap.favqsapp.png"❯
