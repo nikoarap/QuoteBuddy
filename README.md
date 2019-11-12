@@ -39,6 +39,7 @@ Finally, in the Search Quotes section, the user can search for quotes by word re
 
 - Androidx RecyclerView
 - Retrofit2 with Gson Converter (for server requests)
-- Androidx CardView
+- Androidx CardView 
 - Androidx Room 2.0.0 (for SQLite db)
 - ButterKnife 10.2.0 (for ViewBinding)
+- Androidx-navigation navigation-fragment (for bottom Navigation)
