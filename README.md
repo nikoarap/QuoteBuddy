@@ -38,8 +38,8 @@ Finally, in the Search Quotes section, the user can search for quotes by word re
 *Core Libraries & Dependencies Used:*
 
 - Androidx RecyclerView
-- Retrofit2 with Gson Converter (for server requests)
+- Retrofit2.6.2 with Gson Converter (for server requests)
 - Androidx CardView 
-- Androidx Room 2.0.0 (for SQLite db)
+- Androidx Room 2.2.1 (for SQLite db)
 - ButterKnife 10.2.0 (for ViewBinding)
 - Androidx-navigation navigation-fragment (for bottom Navigation)
