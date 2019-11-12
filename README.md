@@ -34,3 +34,7 @@ Finally, in the Search Quotes section, the user can search for quotes by word re
 
 ![](images/Screenshot_2019-11-12-17-54-54-579_com.nikoarap.favqsapp.png)
 
+---
+*Libraries & Dependencies Used:*
+ -sd
+ -asda
