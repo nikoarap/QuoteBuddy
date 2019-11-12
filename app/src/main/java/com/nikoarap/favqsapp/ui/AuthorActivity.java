@@ -17,6 +17,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Objects;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -45,6 +46,9 @@ public class AuthorActivity extends AppCompatActivity implements QuotesAdapter.O
 
         Intent i = getIntent();
         String quoteAuthor = i.getStringExtra("quoteAuthor");
+
+        Objects.requireNonNull(AuthorActivity.this.getSupportActionBar())
+                .setTitle(quoteAuthor);
 
         quoteAuthor_2 = quoteAuthor.replaceAll("\\s+","+");
 

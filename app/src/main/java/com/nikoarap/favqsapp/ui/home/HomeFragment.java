@@ -46,8 +46,8 @@ public class HomeFragment extends Fragment implements QuotesAdapter.OnQuoteListe
 
         Objects.requireNonNull(((AppCompatActivity)
                 Objects.requireNonNull(getActivity())).getSupportActionBar())
-                .setTitle("Welcome "+ loginResponse);
-
+                .setTitle("Welcome, "+ loginResponse);
+        
         recView = root.findViewById(R.id.quotesRecyclerView);
 
         fetchQuoteList();
