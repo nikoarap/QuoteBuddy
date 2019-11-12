@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/PowderBlue">
+
+
+            <RelativeLayout
+                android:id="@+id/relayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+<!--                <ImageButton-->
+<!--                    android:id="@+id/backbutton"-->
+<!--                    android:layout_width="27sp"-->
+<!--                    android:layout_height="27sp"-->
+<!--                    android:background="@drawable/baseline_arrow_back_black_36dp"-->
+<!--                    android:contentDescription="@string/image" />-->
+
+<!--                <ImageButton-->
+<!--                    android:id="@+id/infobutton"-->
+<!--                    android:layout_width="27sp"-->
+<!--                    android:layout_height="27sp"-->
+<!--                    android:layout_alignParentRight="true"-->
+<!--                    android:background="@drawable/baseline_more_vert_black_36dp"-->
+<!--                    android:contentDescription="@string/image"-->
+<!--                    android:layout_alignParentEnd="true" />-->
+
+<!--                <de.hdodenhof.circleimageview.CircleImageView-->
+<!--                    android:id="@+id/image"-->
+<!--                    android:layout_width="70sp"-->
+<!--                    android:layout_height="70sp"-->
+<!--                    android:layout_centerHorizontal="true"-->
+<!--                    android:src="@drawable/applogo"-->
+<!--                    android:layout_marginLeft="20sp"-->
+<!--                    android:layout_marginTop="1dp"-->
+<!--                    android:layout_marginStart="20sp" />-->
+
+                <TextView
+                    android:id="@+id/name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="17sp"
+                    android:layout_below="@+id/image"
+                    android:text=""
+                    android:textColor="#000"
+                    android:layout_centerHorizontal="true"
+                    />
+
+            </RelativeLayout>
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/quotesRecyclerView"
+        android:orientation="vertical"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

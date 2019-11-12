@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/quote_body"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text=""
+        android:gravity="center"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="21dp" />
+
+    <TextView
+        android:id="@+id/quote_author"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text=""
+        android:textStyle="italic"
+        android:layout_marginLeft="60dp"
+        android:layout_below="@+id/quote_body"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="19dp" />
+
+    <ImageView
+        android:layout_below="@+id/quote_author"
+        android:id="@+id/imageTag"
+        android:layout_marginRight="5dp"
+        android:layout_toLeftOf="@+id/quote_tags"
+        android:layout_marginTop="30dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/baseline_local_offer_black_18dp"/>
+
+    <TextView
+        android:id="@+id/quote_tags"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="Tags:"
+        android:layout_below="@+id/quote_author"
+        android:layout_centerHorizontal="true"
+        android:textSize="16dip"/>
+
+
+    <ImageView
+        android:id="@+id/imagrUpvotes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="10dp"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/quote_tags"
+        android:src="@drawable/baseline_thumb_up_black_18dp" />
+
+    <TextView
+        android:id="@+id/quote_upvotes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/quote_tags"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="5dp"
+        android:layout_toRightOf="@+id/imagrUpvotes"
+        android:text="0"
+        android:textSize="16dip" />
+
+    <ImageView
+        android:layout_below="@+id/quote_tags"
+        android:id="@+id/imageDownvote"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/baseline_thumb_down_black_18dp"/>
+
+    <TextView
+        android:id="@+id/quote_downvotes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/imageDownvote"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="10dp"
+        android:text="0"
+        android:layout_below="@+id/quote_tags"
+        android:textSize="16dip"/>
+
+    <ImageView
+        android:layout_below="@+id/quote_tags"
+        android:id="@+id/imageFavorite"
+        android:layout_marginTop="10dp"
+        android:layout_toLeftOf="@+id/quote_favcount"
+        android:layout_marginRight="5dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/baseline_favorite_black_24dp"/>
+
+
+    <TextView
+        android:id="@+id/quote_favcount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginEnd="60dp"
+        android:layout_marginTop="10dp"
+        android:text="0"
+        android:layout_below="@+id/quote_tags"
+        android:textSize="16dip"/>
+
+
+    <ToggleButton
+        android:id="@+id/button_favorite"
+        android:layout_below="@+id/quote_favcount"
+        android:layout_marginTop="50dp"
+        android:layout_centerHorizontal="true"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:background="@drawable/button_favorite"
+        android:checked="false"
+        android:text=""
+        android:textOff=""
+        android:textOn=""/>
+
+    <TextView
+        android:id="@+id/text_fav"
+        android:layout_below="@+id/button_favorite"
+        android:layout_marginTop="5dp"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:fontFamily="cursive"
+        android:text="Fav This Quote"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="27dp" />
+
+
+
+
+
+
+
+</RelativeLayout>

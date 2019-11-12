@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">QuoteBuddy</string>
+    <string name="title_activity_user_menu">UserMenuActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_favourites">Favourites</string>
+    <string name="title_search">Search</string>
+</resources>
