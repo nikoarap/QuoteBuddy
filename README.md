@@ -7,7 +7,7 @@ https://favqs.com
 
 App Functionalities & User Guide:
 
-![](appimages/https://user-images.githubusercontent.com/15460920/68714714-b357bf80-05a0-11ea-9306-b8150f20f426.png
-)
 
 
+
+❮img src="appimages/Screenshot_2019-11-12-17-51-33-702com.nikoarap.favqsapp.png"❯
