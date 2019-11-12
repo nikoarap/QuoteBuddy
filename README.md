@@ -35,8 +35,10 @@ Finally, in the Search Quotes section, the user can search for quotes by word re
 ![](images/Screenshot_2019-11-12-17-54-54-579_com.nikoarap.favqsapp.png)
 
 ---
-*Libraries & Dependencies Used:*
+*Core Libraries & Dependencies Used:*
 
-- George Washington
-- John Adams
-- Thomas Jefferson
+- Androidx RecyclerView
+- Retrofit2 with Gson Converter (for server requests)
+- Androidx CardView
+- Androidx Room 2.0.0 (for SQLite db)
+- ButterKnife 10.2.0 (for ViewBinding)
