@@ -13,7 +13,7 @@ import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
 
-
+//interface for server requests and API handling
 public interface FetchJSONDataAPI {
 
     //get a random list of quotes

@@ -3,6 +3,7 @@ package com.nikoarap.favqsapp.api;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+//base class of retrofit
 public class RetrofitRequestClass {
 
     //retrofit instantiation
@@ -15,6 +16,7 @@ public class RetrofitRequestClass {
 
     private static FetchJSONDataAPI fetchJSONDataAPI = retrofit.create(FetchJSONDataAPI.class);
 
+    //request interface
     public static FetchJSONDataAPI fetchApi() {
         return fetchJSONDataAPI;
     }

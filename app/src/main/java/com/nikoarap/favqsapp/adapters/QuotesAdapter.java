@@ -13,6 +13,7 @@ import com.nikoarap.favqsapp.models.Quotes;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+//RecyclerfView Adapter for quoteList
 public class QuotesAdapter extends RecyclerView.Adapter<QuotesAdapter.QuotesViewHolder> {
 
     private Quotes[] quotesList;
@@ -30,6 +31,7 @@ public class QuotesAdapter extends RecyclerView.Adapter<QuotesAdapter.QuotesView
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.quote_list_item_layout, viewGroup, false);
         return new QuotesViewHolder(view,onQuoteListener);
     }
+
 
     @SuppressLint("SetTextI18n")
     @Override

@@ -7,6 +7,7 @@ import com.google.gson.annotations.SerializedName;
 
 import org.jetbrains.annotations.NotNull;
 
+//POJO class for user sign up
 public class User implements Parcelable {
 
     @SerializedName("login")

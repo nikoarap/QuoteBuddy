@@ -16,6 +16,7 @@ import androidx.room.Entity;
 import androidx.room.OnConflictStrategy;
 import androidx.room.PrimaryKey;
 
+//quote model -- quote POJO class
 @Entity(tableName = "quotes")
 public class Quotes implements Parcelable {
 

@@ -40,6 +40,7 @@ public class FavouritesFragment extends Fragment implements FavQuotesAdapter.OnQ
         recView = root.findViewById(R.id.quotesRecyclerView);
         recView.setNestedScrollingEnabled(false);
 
+        //Initialize the db
         Context context = FavouritesFragment.this.getActivity();
         assert context != null;
         AppDatabase appDatabase = AppDatabase.getInstance(context.getApplicationContext());

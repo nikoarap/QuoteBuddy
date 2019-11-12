@@ -9,9 +9,9 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="26dp"
-        android:paddingLeft="24dp"
-        android:paddingRight="24dp">
+        android:paddingTop="110sp"
+        android:paddingLeft="24sp"
+        android:paddingRight="24sp">
 
         <ImageView android:src="@drawable/applogo"
             android:layout_width="wrap_content"

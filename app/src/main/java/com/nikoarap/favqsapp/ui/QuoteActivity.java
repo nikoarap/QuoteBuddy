@@ -23,6 +23,7 @@ public class QuoteActivity extends AppCompatActivity {
 
     private AppDao appDao;
 
+    //binds views in Butterknife
     @BindView(R.id.quote_body) TextView bodyTv;
     @BindView(R.id.quote_author) TextView authorTv;
     @BindView(R.id.quote_upvotes) TextView upvotesTv;
@@ -43,10 +44,12 @@ public class QuoteActivity extends AppCompatActivity {
         setContentView(R.layout.quote_activity_layout);
         ButterKnife.bind(this);
 
+        //initialize DB in activity
         Context context = QuoteActivity.this.getApplicationContext();
         AppDatabase appDatabase = AppDatabase.getInstance(context.getApplicationContext());
         appDao = appDatabase.getAppDao();
 
+        //gets intent from previous activity along with the passed values
         Intent i = getIntent();
         String quoteId = i.getStringExtra("quoteId");
         String quoteBody = i.getStringExtra("quoteBody");
@@ -65,10 +68,13 @@ public class QuoteActivity extends AppCompatActivity {
         downvotesTv.setText(quoteDownvotes);
         favcountTv.setText(quoteFavCount);
 
+        //quote model
         quote = new Quotes(null, quoteFavCount, quoteAuthor, null, quoteUpvotes,
                 quoteAuthorPerma, quoteId, quoteBody, null, quoteTags, quoteDownvotes);
 
 
+        //favoriteButton implementation--1st click favourites the quote, 2nd click unfavourites it
+        //by favouriting a quote, it is stored in SQLite, by Unfavouriting it it is deleted
         btnFav.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if(isChecked) {
                 insertFavQuoteTask(quote);
@@ -80,6 +86,7 @@ public class QuoteActivity extends AppCompatActivity {
 
         });
 
+        //clicks on the Author Name Text View pass to an activity that displays quotes from this Author
         authorTv.setOnClickListener(v -> {
             Intent intent = new Intent(QuoteActivity.this,AuthorActivity.class);
             intent.putExtra("quoteAuthor", quoteAuthor);
@@ -97,6 +104,7 @@ public class QuoteActivity extends AppCompatActivity {
 
     }
 
+    //extracts the Tags and concatenates them to a text view
     public void extractTags(){
         int i;
         for(i = 0; i < quoteTags.length; i++ ){

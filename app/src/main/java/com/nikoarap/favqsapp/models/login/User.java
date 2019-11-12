@@ -5,6 +5,7 @@ import android.os.Parcelable;
 
 import com.google.gson.annotations.SerializedName;
 
+//POJO class for user login
 public class User implements Parcelable {
 
     @SerializedName("login")

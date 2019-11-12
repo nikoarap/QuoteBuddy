@@ -5,6 +5,7 @@ import android.os.AsyncTask;
 import com.nikoarap.favqsapp.db.AppDao;
 import com.nikoarap.favqsapp.models.Quotes;
 
+//asyncTask for deleting favourited quotes
 public class DeleteFavQuoteAsyncTask  extends AsyncTask<Quotes, Void, Void> {
 
     private AppDao appDao;

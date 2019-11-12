@@ -42,12 +42,16 @@ public class HomeFragment extends Fragment implements QuotesAdapter.OnQuoteListe
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_home, container, false);
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+
+        //gets the saved user from SharedPreferences
         String loginResponse = prefs.getString("login", "defaultStringIfNothingFound");
 
+        //set title to Action Bar
         Objects.requireNonNull(((AppCompatActivity)
                 Objects.requireNonNull(getActivity())).getSupportActionBar())
                 .setTitle("Welcome, "+ loginResponse);
-        
+
+        //recycler view
         recView = root.findViewById(R.id.quotesRecyclerView);
 
         fetchQuoteList();
@@ -55,6 +59,7 @@ public class HomeFragment extends Fragment implements QuotesAdapter.OnQuoteListe
         return root;
     }
 
+    //fetches a random list of quotes from the server
     private void fetchQuoteList() {
         FetchJSONDataAPI service = RetrofitRequestClass.fetchApi();
         Call<QuoteModel> call = service.getQuotesApi();
@@ -78,6 +83,7 @@ public class HomeFragment extends Fragment implements QuotesAdapter.OnQuoteListe
             }
         });
     }
+
 
     private void populateRecyclerView(Quotes[] quoteList) {
         RecyclerView.LayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());

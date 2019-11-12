@@ -36,6 +36,7 @@ public class SplashActivity extends AppCompatActivity {
 
         fetchRandomQuote();
 
+        //thread that displays this activity for 3,5 seconds and then passes to the next
         Thread logoTimer = new Thread() {
             public void run() {
                 try {
@@ -52,6 +53,7 @@ public class SplashActivity extends AppCompatActivity {
         logoTimer.start();
     }
 
+    //fetches a random quote from the server
     private void fetchRandomQuote() {
         FetchJSONDataAPI service = RetrofitRequestClass.fetchApi();
         Call<QuoteModel> call = service.getQuotesApi();

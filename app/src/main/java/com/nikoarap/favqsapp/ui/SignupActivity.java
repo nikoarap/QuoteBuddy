@@ -48,16 +48,15 @@ public class SignupActivity extends AppCompatActivity {
             startActivity(intent);
         });
     }
-
+    //user sign up implementation
     public void signup() {
-
         if (!validate()) {
-
             return;
         }
 
         signupButton.setEnabled(false);
 
+        //starts a progressDialog that stops when a Sign up fails or is successful
         final ProgressDialog progressDialog = new ProgressDialog(SignupActivity.this,
                 R.style.Theme_AppCompat_DayNight_Dialog);
         progressDialog.setIndeterminate(true);
@@ -68,6 +67,7 @@ public class SignupActivity extends AppCompatActivity {
         String email = emailText.getText().toString();
         String password = passwordText.getText().toString();
 
+        //sending user credentials to the server db and gets the authentication back
         FetchJSONDataAPI service = RetrofitRequestClass.fetchApi();
         service.signUpAccount(new UserSignupSessionRequest(new User(name, email, password))).enqueue(new Callback<SignUpAuthorization>() {
             @Override
@@ -110,6 +110,7 @@ public class SignupActivity extends AppCompatActivity {
         signupButton.setEnabled(true);
     }
 
+    //checks if the user inputs are valid for logging in
     public boolean validate() {
         boolean valid = true;
 
@@ -141,6 +142,7 @@ public class SignupActivity extends AppCompatActivity {
         return valid;
     }
 
+    //pressing the backButton twice exits the application
     @Override
     public void onBackPressed() {
         if(backButtonCount >= 1) {

@@ -36,6 +36,8 @@ public class LoginActivity extends AppCompatActivity {
     private static String loginResponse;
     private static String emailResponse;
 
+
+    //bind all the viewObjects in ButterKnife
     @BindView(R.id.input_email) EditText emailText;
     @BindView(R.id.input_password) EditText passwordText;
     @BindView(R.id.btn_login) Button loginButton;
@@ -55,6 +57,7 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
+    //login authentication implementation
     public void login() {
         if (!validate()) {
             onLoginFailed();
@@ -63,6 +66,7 @@ public class LoginActivity extends AppCompatActivity {
 
         loginButton.setEnabled(false);
 
+        //starts a progressDialog that stops when a Login fails or is successful
         final ProgressDialog progressDialog = new ProgressDialog(LoginActivity.this,
                 R.style.Theme_AppCompat_DayNight_Dialog);
         progressDialog.setIndeterminate(true);
@@ -72,6 +76,7 @@ public class LoginActivity extends AppCompatActivity {
         String email = emailText.getText().toString();
         String password = passwordText.getText().toString();
 
+        //sending user credentials to the server db and gets the authentication back
         FetchJSONDataAPI service = RetrofitRequestClass.fetchApi();
         service.loginAccount(new UserLoginSessionRequest(new User(email, password))).enqueue(new Callback<LoginAuthorization>() {
             @Override
@@ -90,6 +95,8 @@ public class LoginActivity extends AppCompatActivity {
                     tokenResponse = response.body().getToken();
                     loginResponse = response.body().getLogin();
                     emailResponse = response.body().getEmail();
+
+                    //saves user authentication details to SharedPreferences
                     SharedPreferences.Editor prefEditor = PreferenceManager.getDefaultSharedPreferences(LoginActivity.this).edit();
                     prefEditor.putString("token", tokenResponse);
                     prefEditor.putString("login", loginResponse);
@@ -110,6 +117,7 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
+
     public void onLoginSuccess() {
         loginButton.setEnabled(true);
         Toast.makeText(LoginActivity.this, "Login Successfully!", Toast.LENGTH_SHORT).show();
@@ -123,6 +131,7 @@ public class LoginActivity extends AppCompatActivity {
         loginButton.setEnabled(true);
     }
 
+    //checks if the user inputs are valid for logging in
     public boolean validate() {
         boolean valid = true;
 
@@ -146,6 +155,7 @@ public class LoginActivity extends AppCompatActivity {
         return valid;
     }
 
+    //pressing the backButton twice exits the application
     @Override
     public void onBackPressed() {
         if(backButtonCount >= 1) {

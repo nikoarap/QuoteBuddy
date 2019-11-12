@@ -14,8 +14,6 @@ import androidx.navigation.ui.NavigationUI;
 
 public class UserMenuActivity extends AppCompatActivity {
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,7 +28,6 @@ public class UserMenuActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(UserMenuActivity.this, navController, appBarConfiguration);
 
         NavigationUI.setupWithNavController(navView, navController);
-
     }
 
     @Override

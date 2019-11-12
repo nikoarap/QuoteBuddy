@@ -44,17 +44,21 @@ public class AuthorActivity extends AppCompatActivity implements QuotesAdapter.O
         recView = findViewById(R.id.quotesRecyclerView);
         ButterKnife.bind(this);
 
+        //gets intent from previous activity along with the passed values
         Intent i = getIntent();
         String quoteAuthor = i.getStringExtra("quoteAuthor");
 
+        //sets title to actionBar
         Objects.requireNonNull(AuthorActivity.this.getSupportActionBar())
                 .setTitle(quoteAuthor);
 
+        //converts string to be properly added to the server request
         quoteAuthor_2 = quoteAuthor.replaceAll("\\s+","+");
 
         fetchQuoteList();
     }
 
+    //fetches the list of quotes by the corresponding Author
     private void fetchQuoteList() {
         FetchJSONDataAPI service = RetrofitRequestClass.fetchApi();
         Call<QuoteModel> call = service.getQuotesByAuthor(quoteAuthor_2,"&","author");
@@ -81,6 +85,7 @@ public class AuthorActivity extends AppCompatActivity implements QuotesAdapter.O
         });
     }
 
+    //fills the Recycler view with listItems - quotes
     private void populateRecyclerView(Quotes[] quoteList) {
         RecyclerView.LayoutManager linearLayoutManager = new LinearLayoutManager(this);
         recView.setLayoutManager(linearLayoutManager);
@@ -92,6 +97,7 @@ public class AuthorActivity extends AppCompatActivity implements QuotesAdapter.O
         recView.scheduleLayoutAnimation();
     }
 
+    //listens to clicks given in each position in the RecyclerView, then goes to the next Activity passing the corresponding data
     @Override
     public void onQuoteClick(int position) {
         Intent i = new Intent(AuthorActivity.this, QuoteActivity.class);
@@ -106,6 +112,7 @@ public class AuthorActivity extends AppCompatActivity implements QuotesAdapter.O
         startActivity(i);
     }
 
+    //goes to the main activity
     @Override
     public void onBackPressed() {
         Intent intent = new Intent(AuthorActivity.this,UserMenuActivity.class);

@@ -7,6 +7,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
 
+//quotemodel model -- quotemodel POJO class
 public class QuoteModel implements Parcelable {
 
     private String last_page;

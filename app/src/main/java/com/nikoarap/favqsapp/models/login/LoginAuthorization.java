@@ -6,6 +6,7 @@ import android.os.Parcelable;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+//POJO class for login response body from server
 public class LoginAuthorization implements Parcelable {
 
     @SerializedName("User-Token")
