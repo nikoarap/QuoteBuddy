@@ -36,5 +36,7 @@ Finally, in the Search Quotes section, the user can search for quotes by word re
 
 ---
 *Libraries & Dependencies Used:*
- -sd
- -asda
+
+- George Washington
+- John Adams
+- Thomas Jefferson
