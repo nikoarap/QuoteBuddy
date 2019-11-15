@@ -15,6 +15,8 @@ import com.nikoarap.favqsapp.db.AppDao;
 import com.nikoarap.favqsapp.db.AppDatabase;
 import com.nikoarap.favqsapp.models.Quotes;
 
+import java.util.Objects;
+
 import androidx.appcompat.app.AppCompatActivity;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -22,6 +24,9 @@ import butterknife.ButterKnife;
 public class QuoteActivity extends AppCompatActivity {
 
     private AppDao appDao;
+    private String quoteAuthor;
+    private String[] quoteTags;
+    private Quotes quote;
 
     //binds views in Butterknife
     @BindView(R.id.quote_body) TextView bodyTv;
@@ -31,11 +36,6 @@ public class QuoteActivity extends AppCompatActivity {
     @BindView(R.id.quote_favcount) TextView favcountTv;
     @BindView(R.id.quote_tags) TextView tagsTv;
     @BindView(R.id.button_favorite) ToggleButton btnFav;
-
-    private String quoteAuthor;
-    private String quoteAuthorPerma;
-    private String[] quoteTags;
-    private Quotes quote;
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -51,14 +51,14 @@ public class QuoteActivity extends AppCompatActivity {
 
         //gets intent from previous activity along with the passed values
         Intent i = getIntent();
-        String quoteId = i.getStringExtra("quoteId");
-        String quoteBody = i.getStringExtra("quoteBody");
-        quoteAuthor = i.getStringExtra("quoteAuthor");
-        quoteAuthorPerma = i.getStringExtra("quoteAuthorPerma");
-        String quoteUpvotes = i.getStringExtra("quoteUpvotes");
-        String quoteDownvotes = i.getStringExtra("quoteDownvotes");
-        quoteTags = i.getStringArrayExtra("guoteTags");
-        String quoteFavCount = i.getStringExtra("quoteFavCount");
+        quote = Objects.requireNonNull(i.getExtras()).getParcelable("quote");
+
+        String quoteBody = Objects.requireNonNull(quote).getBody();
+        quoteAuthor = quote.getAuthor();
+        String quoteUpvotes = quote.getUpvotes_count();
+        String quoteDownvotes = quote.getDownvotes_count();
+        quoteTags = quote.getTags();
+        String quoteFavCount = quote.getFavorites_count();
 
         extractTags();
 
@@ -67,10 +67,6 @@ public class QuoteActivity extends AppCompatActivity {
         upvotesTv.setText(quoteUpvotes);
         downvotesTv.setText(quoteDownvotes);
         favcountTv.setText(quoteFavCount);
-
-        //quote model
-        quote = new Quotes(null, quoteFavCount, quoteAuthor, null, quoteUpvotes,
-                quoteAuthorPerma, quoteId, quoteBody, null, quoteTags, quoteDownvotes);
 
 
         //favoriteButton implementation--1st click favourites the quote, 2nd click unfavourites it
@@ -90,16 +86,7 @@ public class QuoteActivity extends AppCompatActivity {
         authorTv.setOnClickListener(v -> {
             Intent intent = new Intent(QuoteActivity.this,AuthorActivity.class);
             intent.putExtra("quoteAuthor", quoteAuthor);
-            intent.putExtra("quoteAuthorPerma", quoteAuthorPerma);
-            intent.putExtra("quoteId", quoteAuthorPerma);
-            intent.putExtra("quoteBody", quoteAuthorPerma);
-            intent.putExtra("quoteUpvotes", quoteAuthorPerma);
-            intent.putExtra("quoteDownvotes", quoteAuthorPerma);
-            intent.putExtra("guoteTags", quoteAuthorPerma);
-            intent.putExtra("quoteFavCount", quoteAuthorPerma);
             startActivity(intent);
-
-
         });
 
     }

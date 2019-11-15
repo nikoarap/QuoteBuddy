@@ -2,9 +2,11 @@ package com.nikoarap.favqsapp.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.nikoarap.favqsapp.R;
+import com.nikoarap.favqsapp.utils.Constants;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
@@ -30,10 +32,18 @@ public class UserMenuActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(navView, navController);
     }
 
+    //pressing the backButton twice exits the application
     @Override
     public void onBackPressed() {
+        if(Constants.backButtonCount >= 1) {
             Intent intent = new Intent(Intent.ACTION_MAIN);
             intent.addCategory(Intent.CATEGORY_HOME);
             startActivity(intent);
+        }
+        else {
+            Toast.makeText(UserMenuActivity.this,
+                    "Press the back button again for exit", Toast.LENGTH_SHORT).show();
+            Constants.backButtonCount++;
+        }
     }
 }

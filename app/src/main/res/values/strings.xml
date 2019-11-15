@@ -16,4 +16,7 @@
     <string name="no_acc">No account yet? Sign Up</string>
     <string name="login">Login</string>
     <string name="username_or_email">Username or Email</string>
+    <string name="tokenResponse">token</string>
+    <string name="loginResponse">login</string>
+    <string name="emailResponse">email</string>
 </resources>

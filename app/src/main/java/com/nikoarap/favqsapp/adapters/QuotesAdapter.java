@@ -1,6 +1,7 @@
 package com.nikoarap.favqsapp.adapters;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,8 +10,10 @@ import android.widget.TextView;
 
 import com.nikoarap.favqsapp.R;
 import com.nikoarap.favqsapp.models.Quotes;
+import com.nikoarap.favqsapp.utils.VerticalSpacingDecorator;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 //RecyclerfView Adapter for quoteList

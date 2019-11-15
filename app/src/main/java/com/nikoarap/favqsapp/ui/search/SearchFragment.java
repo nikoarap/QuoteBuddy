@@ -8,55 +8,57 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.nikoarap.favqsapp.R;
+import com.nikoarap.favqsapp.adapters.PopulateRecyclerView;
 import com.nikoarap.favqsapp.adapters.QuotesAdapter;
 import com.nikoarap.favqsapp.api.FetchJSONDataAPI;
 import com.nikoarap.favqsapp.api.RetrofitRequestClass;
 import com.nikoarap.favqsapp.models.QuoteModel;
 import com.nikoarap.favqsapp.models.Quotes;
 import com.nikoarap.favqsapp.ui.QuoteActivity;
-import com.nikoarap.favqsapp.utils.VerticalSpacingDecorator;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Objects;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+//resets after tapping elsewhere
 public class SearchFragment extends Fragment implements QuotesAdapter.OnQuoteListener {
 
-    private Quotes[] quotes;
+    private static Quotes[] quotes;
     private RecyclerView recView;
+    private PopulateRecyclerView populateRecyclerView;
     private ArrayList<Quotes> quoteList = new ArrayList<>();
     private SearchView searchView;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_search, container, false);
-        recView = root.findViewById(R.id.quotesRecyclerView);
         searchView = root.findViewById(R.id.searchView);
+        recView = root.findViewById(R.id.quotesRecyclerView);
 
-        initSearchView();
+        initSearchView(this);
 
         return root;
     }
 
     //gets quotes by user input in the Search Query
-    private void initSearchView(){
+    private void initSearchView(QuotesAdapter.OnQuoteListener quoteListener){
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                //fetches the corresponding quotes from the server
-                fetchQuoteList(query);
+                //fetches the quotes that match the query from the server
+                fetchQuoteList(query,quoteListener);
                 return false;
             }
-
             @Override
             public boolean onQueryTextChange(String query) {
                 return false;
@@ -64,7 +66,7 @@ public class SearchFragment extends Fragment implements QuotesAdapter.OnQuoteLis
         });
     }
 
-    private void fetchQuoteList(String query) {
+    private void fetchQuoteList(String query, QuotesAdapter.OnQuoteListener quoteListener) {
         FetchJSONDataAPI service = RetrofitRequestClass.fetchApi();
         Call<QuoteModel> call = service.getQuotesByWord(query);
         call.enqueue(new Callback<QuoteModel>() {
@@ -72,11 +74,16 @@ public class SearchFragment extends Fragment implements QuotesAdapter.OnQuoteLis
             public void onResponse(@NotNull Call<QuoteModel> call, @NotNull Response<QuoteModel> response) {
                 if (response.body() != null) {
                     QuoteModel quoteModel = response.body();
-                    quoteModel.setQuotes(response.body().getQuotes());
                     quotes = quoteModel.getQuotes();
-                    for(Quotes quote: quotes){
-                        populateRecyclerView(quotes);
-                        quoteList.add(quote);
+                    quoteList.clear();
+                    quoteList.addAll(Arrays.asList(quotes));
+                    if (quoteList.get(0).getAuthor() == null) {
+                        recView.removeAllViewsInLayout();
+                        Toast.makeText(getActivity(), "no quotes found", Toast.LENGTH_SHORT).show();
+                    }
+                    else{
+                        populateRecyclerView = new PopulateRecyclerView(Objects.requireNonNull(getActivity()),recView);
+                        populateRecyclerView.populate(quotes,quoteListener);
                     }
                 }
             }
@@ -88,28 +95,10 @@ public class SearchFragment extends Fragment implements QuotesAdapter.OnQuoteLis
         });
     }
 
-    private void populateRecyclerView(Quotes[] quoteList) {
-        RecyclerView.LayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
-        recView.setLayoutManager(linearLayoutManager);
-        QuotesAdapter recAdapter = new QuotesAdapter(quoteList, this);
-        VerticalSpacingDecorator itemDecorator = new VerticalSpacingDecorator(1);
-        recView.addItemDecoration(itemDecorator);
-        recView.setAdapter(recAdapter);
-        recAdapter.notifyDataSetChanged();
-        recView.scheduleLayoutAnimation();
-    }
-
     @Override
     public void onQuoteClick(int position) {
         Intent i = new Intent(getActivity(), QuoteActivity.class);
-        i.putExtra("quoteId", quoteList.get(position).getId());
-        i.putExtra("quoteBody", quoteList.get(position).getBody());
-        i.putExtra("quoteAuthor", quoteList.get(position).getAuthor());
-        i.putExtra("quoteAuthorPerma", quoteList.get(position).getAuthor_permalink());
-        i.putExtra("quoteUpvotes", quoteList.get(position).getUpvotes_count());
-        i.putExtra("quoteDownvotes", quoteList.get(position).getDownvotes_count());
-        i.putExtra("guoteTags", quoteList.get(position).getTags());
-        i.putExtra("quoteFavCount", quoteList.get(position).getFavorites_count());
+        i.putExtra("quote", quoteList.get(position));
         startActivity(i);
     }
 }

@@ -44,6 +44,22 @@ public class QuoteModel implements Parcelable {
         this.quotes = quotes;
     }
 
+    public String getLast_page() {
+        return last_page;
+    }
+
+    public void setLast_page(String last_page) {
+        this.last_page = last_page;
+    }
+
+    public String getPage() {
+        return page;
+    }
+
+    public void setPage(String page) {
+        this.page = page;
+    }
+
     @NotNull
     @Override
     public String toString()

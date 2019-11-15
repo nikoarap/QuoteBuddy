@@ -1,5 +1,7 @@
 package com.nikoarap.favqsapp.api;
 
+import com.nikoarap.favqsapp.utils.Constants;
+
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 

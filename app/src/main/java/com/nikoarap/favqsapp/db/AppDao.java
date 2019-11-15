@@ -24,7 +24,7 @@ public interface AppDao {
 
     //select all favourited quotes from the db
     @Query("SELECT * FROM quotes")
-    LiveData<List<Quotes>> getFavdQuotes();
+    LiveData<Quotes[]> getFavdQuotes();
 
 
 }

@@ -3,6 +3,7 @@ package com.nikoarap.favqsapp.ui;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,6 +24,7 @@ import retrofit2.Response;
 
 public class SplashActivity extends AppCompatActivity {
 
+    Handler handler = new Handler();
     private Quotes[] quotes;
 
     @BindView(R.id.quoteText) TextView quoteText;
@@ -36,21 +38,12 @@ public class SplashActivity extends AppCompatActivity {
 
         fetchRandomQuote();
 
-        //thread that displays this activity for 3,5 seconds and then passes to the next
-        Thread logoTimer = new Thread() {
-            public void run() {
-                try {
-                    sleep(3500);
-                    Intent i = new Intent(SplashActivity.this, LoginActivity.class);
-                    startActivity(i);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                } finally {
-                    finish();
-                }
-            }
-        };
-        logoTimer.start();
+        handler.postDelayed(() -> {
+            Intent i = new Intent(SplashActivity.this, LoginActivity.class);
+            startActivity(i);
+            SplashActivity.this.finish();
+        }, 3500);
+
     }
 
     //fetches a random quote from the server
@@ -63,7 +56,6 @@ public class SplashActivity extends AppCompatActivity {
             public void onResponse(@NotNull Call<QuoteModel> call, @NotNull Response<QuoteModel> response) {
                 if (response.body() != null) {
                     QuoteModel quoteModel = response.body();
-                    quoteModel.setQuotes(response.body().getQuotes());
                     quotes = quoteModel.getQuotes();
                     String body = quotes[0].getBody();
                     String author = quotes[0].getAuthor();
@@ -77,5 +69,12 @@ public class SplashActivity extends AppCompatActivity {
                 Toast.makeText(SplashActivity.this, "error" ,Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        //stops handler and destroys the Activity
+        handler.removeCallbacksAndMessages(null);
+        finish();
     }
 }

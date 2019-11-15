@@ -26,12 +26,12 @@ import com.nikoarap.favqsapp.api.RetrofitRequestClass;
 import com.nikoarap.favqsapp.models.login.LoginAuthorization;
 import com.nikoarap.favqsapp.models.login.UserLoginSessionRequest;
 import com.nikoarap.favqsapp.models.login.User;
+import com.nikoarap.favqsapp.utils.Constants;
 
 
 public class LoginActivity extends AppCompatActivity {
 
     public static final String TAG = "LoginActivity";
-    private int backButtonCount=0;
     private static String tokenResponse;
     private static String loginResponse;
     private static String emailResponse;
@@ -87,20 +87,16 @@ public class LoginActivity extends AppCompatActivity {
                     progressDialog.dismiss();
                 }
                 else {
-                    Log.i(TAG, "onResponse: " + response.body().getToken());
-                    Log.i(TAG, "onResponse: " + response.body().getLogin());
-                    Log.i(TAG, "onResponse: " + response.body().getEmail());
-                    Log.i(TAG, "onResponse: " + response.body().getError_code());
-                    Log.i(TAG, "onResponse: " + response.body().getMessage());
                     tokenResponse = response.body().getToken();
                     loginResponse = response.body().getLogin();
                     emailResponse = response.body().getEmail();
 
+                    //wrapper class and constants no string
                     //saves user authentication details to SharedPreferences
                     SharedPreferences.Editor prefEditor = PreferenceManager.getDefaultSharedPreferences(LoginActivity.this).edit();
-                    prefEditor.putString("token", tokenResponse);
-                    prefEditor.putString("login", loginResponse);
-                    prefEditor.putString("email", emailResponse);
+                    prefEditor.putString(getString(R.string.tokenResponse), tokenResponse);
+                    prefEditor.putString(getString(R.string.loginResponse), loginResponse);
+                    prefEditor.putString(getString(R.string.emailResponse), emailResponse);
                     prefEditor.apply();
 
                     onLoginSuccess();
@@ -158,7 +154,7 @@ public class LoginActivity extends AppCompatActivity {
     //pressing the backButton twice exits the application
     @Override
     public void onBackPressed() {
-        if(backButtonCount >= 1) {
+        if(Constants.backButtonCount >= 1) {
             Intent intent = new Intent(Intent.ACTION_MAIN);
             intent.addCategory(Intent.CATEGORY_HOME);
             startActivity(intent);
@@ -166,7 +162,7 @@ public class LoginActivity extends AppCompatActivity {
         else {
             Toast.makeText(LoginActivity.this,
                     "Press the back button again for exit", Toast.LENGTH_SHORT).show();
-            backButtonCount++;
+            Constants.backButtonCount++;
         }
     }
 }

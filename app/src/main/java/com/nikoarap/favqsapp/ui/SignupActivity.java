@@ -15,6 +15,7 @@ import com.nikoarap.favqsapp.api.RetrofitRequestClass;
 import com.nikoarap.favqsapp.models.signup.SignUpAuthorization;
 import com.nikoarap.favqsapp.models.signup.User;
 import com.nikoarap.favqsapp.models.signup.UserSignupSessionRequest;
+import com.nikoarap.favqsapp.utils.Constants;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -27,7 +28,6 @@ import retrofit2.Response;
 public class SignupActivity extends AppCompatActivity {
 
     public static final String TAG = "SignupActivity";
-    private int backButtonCount=0;
 
     @BindView(R.id.input_name) EditText nameText;
     @BindView(R.id.input_email) EditText emailText;
@@ -145,7 +145,7 @@ public class SignupActivity extends AppCompatActivity {
     //pressing the backButton twice exits the application
     @Override
     public void onBackPressed() {
-        if(backButtonCount >= 1) {
+        if(Constants.backButtonCount >= 1) {
             Intent intent = new Intent(Intent.ACTION_MAIN);
             intent.addCategory(Intent.CATEGORY_HOME);
             startActivity(intent);
@@ -153,7 +153,7 @@ public class SignupActivity extends AppCompatActivity {
         else {
             Toast.makeText(SignupActivity.this,
                     "Press the back button again for exit", Toast.LENGTH_SHORT).show();
-            backButtonCount++;
+            Constants.backButtonCount++;
         }
     }
 }
