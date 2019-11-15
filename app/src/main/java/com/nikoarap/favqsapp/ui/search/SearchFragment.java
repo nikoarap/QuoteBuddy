@@ -101,4 +101,5 @@ public class SearchFragment extends Fragment implements QuotesAdapter.OnQuoteLis
         i.putExtra("quote", quoteList.get(position));
         startActivity(i);
     }
+
 }
