@@ -42,16 +42,8 @@ public class HomeFragment extends Fragment implements QuotesAdapter.OnQuoteListe
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_home, container, false);
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+
         recView = root.findViewById(R.id.quotesRecyclerView);
-
-        //gets the saved user from SharedPreferences
-        String loginResponse = prefs.getString("login", "defaultStringIfNothingFound");
-
-        //set title to Action Bar
-        Objects.requireNonNull(((AppCompatActivity)
-                Objects.requireNonNull(getActivity())).getSupportActionBar())
-                .setTitle("Welcome, "+ loginResponse);
 
         fetchQuoteList(this);
 

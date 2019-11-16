@@ -8,4 +8,10 @@
         <item name="colorAccent">@color/PowderBlue</item>
     </style>
 
+    <!-- Alert Dialogs theme. -->
+    <style name="AlertDialogStyle">
+        <item name="android:textColor">@color/appcolor</item>
+        <item name="android:textColorPrimary">#000000</item>
+    </style>
+
 </resources>

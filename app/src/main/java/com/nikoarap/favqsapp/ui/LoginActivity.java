@@ -2,9 +2,7 @@ package com.nikoarap.favqsapp.ui;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
@@ -26,16 +24,14 @@ import com.nikoarap.favqsapp.api.RetrofitRequestClass;
 import com.nikoarap.favqsapp.models.login.LoginAuthorization;
 import com.nikoarap.favqsapp.models.login.UserLoginSessionRequest;
 import com.nikoarap.favqsapp.models.login.User;
+import com.nikoarap.favqsapp.preferences.PrefsHelper;
 import com.nikoarap.favqsapp.utils.Constants;
 
 
 public class LoginActivity extends AppCompatActivity {
 
     public static final String TAG = "LoginActivity";
-    private static String tokenResponse;
-    private static String loginResponse;
-    private static String emailResponse;
-
+    private PrefsHelper prefsHelper = new PrefsHelper();
 
     //bind all the viewObjects in ButterKnife
     @BindView(R.id.input_email) EditText emailText;
@@ -87,18 +83,8 @@ public class LoginActivity extends AppCompatActivity {
                     progressDialog.dismiss();
                 }
                 else {
-                    tokenResponse = response.body().getToken();
-                    loginResponse = response.body().getLogin();
-                    emailResponse = response.body().getEmail();
-
-                    //wrapper class and constants no string
-                    //saves user authentication details to SharedPreferences
-                    SharedPreferences.Editor prefEditor = PreferenceManager.getDefaultSharedPreferences(LoginActivity.this).edit();
-                    prefEditor.putString(getString(R.string.tokenResponse), tokenResponse);
-                    prefEditor.putString(getString(R.string.loginResponse), loginResponse);
-                    prefEditor.putString(getString(R.string.emailResponse), emailResponse);
-                    prefEditor.apply();
-
+                    //save all user login data to Shared preferences
+                    prefsHelper.saveLoginData(response,LoginActivity.this);
                     onLoginSuccess();
                     progressDialog.dismiss();
                 }

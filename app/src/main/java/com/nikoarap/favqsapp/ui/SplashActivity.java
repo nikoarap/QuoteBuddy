@@ -2,10 +2,8 @@ package com.nikoarap.favqsapp.ui;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
-import android.preference.PreferenceManager;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -14,6 +12,7 @@ import com.nikoarap.favqsapp.api.FetchJSONDataAPI;
 import com.nikoarap.favqsapp.api.RetrofitRequestClass;
 import com.nikoarap.favqsapp.models.QuoteModel;
 import com.nikoarap.favqsapp.models.Quotes;
+import com.nikoarap.favqsapp.preferences.PrefsHelper;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -26,7 +25,8 @@ import retrofit2.Response;
 
 public class SplashActivity extends AppCompatActivity {
 
-    Handler handler = new Handler();
+    private Handler handler = new Handler();
+    private PrefsHelper prefsHelper = new PrefsHelper();
     private Quotes[] quotes;
 
     @BindView(R.id.quoteText) TextView quoteText;
@@ -38,9 +38,8 @@ public class SplashActivity extends AppCompatActivity {
         setContentView(R.layout.splash_activity_layout);
         ButterKnife.bind(this);
 
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(SplashActivity.this);
-        //gets the saved user from SharedPreferences
-        String tokenResponse = prefs.getString(getString(R.string.tokenResponse), "defaultStringIfNothingFound");
+        //gets the saved user token from SharedPreferences
+        String tokenResponse = prefsHelper.getStringfromPrefs(getString(R.string.tokenResponse), SplashActivity.this);
 
         fetchRandomQuote();
 

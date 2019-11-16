@@ -19,4 +19,6 @@
     <string name="tokenResponse">token</string>
     <string name="loginResponse">login</string>
     <string name="emailResponse">email</string>
+    <string name="log_out">Log Out</string>
+    <string name="are_you_sure_you_want_to_log_out">Are you sure you want to logout?</string>
 </resources>
