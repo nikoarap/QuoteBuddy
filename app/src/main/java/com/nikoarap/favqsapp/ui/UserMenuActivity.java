@@ -38,7 +38,7 @@ public class UserMenuActivity extends AppCompatActivity {
         String loginResponse = prefsHelper.getStringfromPrefs(getString(R.string.loginResponse),UserMenuActivity.this);
 
         Objects.requireNonNull(UserMenuActivity.this.getSupportActionBar())
-                .setTitle("Welcome, "+ loginResponse);
+                .setTitle(getString(R.string.welcome) + loginResponse);
 
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
@@ -62,7 +62,7 @@ public class UserMenuActivity extends AppCompatActivity {
         }
         else {
             Toast.makeText(UserMenuActivity.this,
-                    "Press the back button again for exit", Toast.LENGTH_SHORT).show();
+                    R.string.press_back, Toast.LENGTH_SHORT).show();
             Constants.backButtonCount++;
         }
     }
@@ -89,13 +89,13 @@ public class UserMenuActivity extends AppCompatActivity {
         LayoutInflater inflater = this.getLayoutInflater();
          final View view = inflater.inflate(R.layout.logout_dialog_layout, null);
         builder.setView(view);
-        builder.setPositiveButton("OK", (dialog, which) -> {
+        builder.setPositiveButton(getString(R.string.ok), (dialog, which) -> {
             //deletes the user-token from the Shared Preferences, so that he stays logged out
             prefsHelper.deleteStringfromPrefs(getString(R.string.tokenResponse),UserMenuActivity.this);
             Intent intent = new Intent(UserMenuActivity.this, LoginActivity.class);
             startActivity(intent);
         });
-        builder.setNegativeButton("CANCEL", (dialog, which) -> {
+        builder.setNegativeButton(getString(R.string.cancel), (dialog, which) -> {
         });
         builder.show();
     }

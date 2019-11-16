@@ -1,16 +1,13 @@
 package com.nikoarap.favqsapp.ui.home;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 import retrofit2.Call;
@@ -42,11 +39,9 @@ public class HomeFragment extends Fragment implements QuotesAdapter.OnQuoteListe
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_home, container, false);
-
         recView = root.findViewById(R.id.quotesRecyclerView);
 
         fetchQuoteList(this);
-
         return root;
     }
 
@@ -68,7 +63,7 @@ public class HomeFragment extends Fragment implements QuotesAdapter.OnQuoteListe
 
             @Override
             public void onFailure(@NotNull Call<QuoteModel> call, @NotNull Throwable t) {
-                Toast.makeText(getActivity(), "error" ,Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), R.string.error ,Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -76,7 +71,7 @@ public class HomeFragment extends Fragment implements QuotesAdapter.OnQuoteListe
     @Override
     public void onQuoteClick(int position) {
         Intent i = new Intent(getActivity(), QuoteActivity.class);
-        i.putExtra("quote", quoteList.get(position));
+        i.putExtra(getString(R.string.quote), quoteList.get(position));
         startActivity(i);
     }
 }

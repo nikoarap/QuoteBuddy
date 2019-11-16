@@ -46,7 +46,7 @@ public class SplashActivity extends AppCompatActivity {
         handler.postDelayed(() -> {
             //checks if the user-token that is saved in SharedPreferences has the value of the login session we requested from the server
             //if it's not valid that means that the user is not logged in and the app navigates to LoginActivity
-            if(tokenResponse.equals("defaultStringIfNothingFound")){
+            if(tokenResponse.equals(getString(R.string.defaultStringIfNothingFound))){
                 Intent i = new Intent(SplashActivity.this, LoginActivity.class);
                 startActivity(i);
             }
@@ -80,7 +80,7 @@ public class SplashActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(@NotNull Call<QuoteModel> call, @NotNull Throwable t) {
-                Toast.makeText(SplashActivity.this, "error" ,Toast.LENGTH_SHORT).show();
+                Toast.makeText(SplashActivity.this, R.string.error ,Toast.LENGTH_SHORT).show();
             }
         });
     }

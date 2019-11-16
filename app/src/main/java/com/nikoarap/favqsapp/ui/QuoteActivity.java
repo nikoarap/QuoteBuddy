@@ -51,7 +51,7 @@ public class QuoteActivity extends AppCompatActivity {
 
         //gets intent from previous activity along with the passed values
         Intent i = getIntent();
-        quote = Objects.requireNonNull(i.getExtras()).getParcelable("quote");
+        quote = Objects.requireNonNull(i.getExtras()).getParcelable(getString(R.string.quote));
 
         String quoteBody = Objects.requireNonNull(quote).getBody();
         quoteAuthor = quote.getAuthor();
@@ -74,10 +74,10 @@ public class QuoteActivity extends AppCompatActivity {
         btnFav.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if(isChecked) {
                 insertFavQuoteTask(quote);
-                Toast.makeText(QuoteActivity.this, "Quote added to Favorites list!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(QuoteActivity.this, R.string.quote_added, Toast.LENGTH_SHORT).show();
             }else{
                 deleteFavQuoteTask(quote);
-                Toast.makeText(QuoteActivity.this, "Quote deleted from Favorites list", Toast.LENGTH_SHORT).show();
+                Toast.makeText(QuoteActivity.this, R.string.quote_deleted, Toast.LENGTH_SHORT).show();
             }
 
         });
@@ -85,7 +85,7 @@ public class QuoteActivity extends AppCompatActivity {
         //clicks on the Author Name Text View pass to an activity that displays quotes from this Author
         authorTv.setOnClickListener(v -> {
             Intent intent = new Intent(QuoteActivity.this,AuthorActivity.class);
-            intent.putExtra("quoteAuthor", quoteAuthor);
+            intent.putExtra(getString(R.string.quoteAuthor), quoteAuthor);
             startActivity(intent);
         });
 

@@ -43,7 +43,7 @@ public class AuthorActivity extends AppCompatActivity implements QuotesAdapter.O
 
         //gets intent from previous activity along with the passed values
         Intent i = getIntent();
-        String quoteAuthor = i.getStringExtra("quoteAuthor");
+        String quoteAuthor = i.getStringExtra(getString(R.string.quoteAuthor));
 
         //sets title to actionBar
         Objects.requireNonNull(AuthorActivity.this.getSupportActionBar())
@@ -59,7 +59,7 @@ public class AuthorActivity extends AppCompatActivity implements QuotesAdapter.O
 
     private void fetchQuoteList(QuotesAdapter.OnQuoteListener quoteListener) {
         FetchJSONDataAPI service = RetrofitRequestClass.fetchApi();
-        Call<QuoteModel> call = service.getQuotesByAuthor(quoteAuthor_2,"&","author");
+        Call<QuoteModel> call = service.getQuotesByAuthor(quoteAuthor_2,"&",getString(R.string.author));
         call.enqueue(new Callback<QuoteModel>() {
             @Override
             public void onResponse(@NotNull Call<QuoteModel> call, @NotNull Response<QuoteModel> response) {
@@ -74,7 +74,7 @@ public class AuthorActivity extends AppCompatActivity implements QuotesAdapter.O
 
             @Override
             public void onFailure(@NotNull Call<QuoteModel> call, @NotNull Throwable t) {
-                Toast.makeText(AuthorActivity.this, "error" ,Toast.LENGTH_SHORT).show();
+                Toast.makeText(AuthorActivity.this, R.string.error ,Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -83,7 +83,7 @@ public class AuthorActivity extends AppCompatActivity implements QuotesAdapter.O
     @Override
     public void onQuoteClick(int position) {
         Intent i = new Intent(AuthorActivity.this, QuoteActivity.class);
-        i.putExtra("quote", quoteList.get(position));
+        i.putExtra(getString(R.string.quote), quoteList.get(position));
         startActivity(i);
     }
 

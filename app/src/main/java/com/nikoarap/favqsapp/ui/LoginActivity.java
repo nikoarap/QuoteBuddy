@@ -3,7 +3,6 @@ package com.nikoarap.favqsapp.ui;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -30,7 +29,6 @@ import com.nikoarap.favqsapp.utils.Constants;
 
 public class LoginActivity extends AppCompatActivity {
 
-    public static final String TAG = "LoginActivity";
     private PrefsHelper prefsHelper = new PrefsHelper();
 
     //bind all the viewObjects in ButterKnife
@@ -66,7 +64,7 @@ public class LoginActivity extends AppCompatActivity {
         final ProgressDialog progressDialog = new ProgressDialog(LoginActivity.this,
                 R.style.Theme_AppCompat_DayNight_Dialog);
         progressDialog.setIndeterminate(true);
-        progressDialog.setMessage("Authenticating...");
+        progressDialog.setMessage(getString(R.string.auth));
         progressDialog.show();
 
         String email = emailText.getText().toString();
@@ -93,7 +91,6 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onFailure(@NonNull Call<LoginAuthorization> call, @NonNull Throwable t) {
                 t.printStackTrace();
-                Log.e(TAG, "Response: " + t.getMessage());
                 onLoginFailed();
             }
         });
@@ -102,14 +99,14 @@ public class LoginActivity extends AppCompatActivity {
 
     public void onLoginSuccess() {
         loginButton.setEnabled(true);
-        Toast.makeText(LoginActivity.this, "Login Successfully!", Toast.LENGTH_SHORT).show();
+        Toast.makeText(LoginActivity.this, R.string.login_success, Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(LoginActivity.this,UserMenuActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }
 
     public void onLoginFailed() {
-        Toast.makeText(LoginActivity.this, "Invalid email or password", Toast.LENGTH_LONG).show();
+        Toast.makeText(LoginActivity.this, R.string.invalid_mail_pass, Toast.LENGTH_LONG).show();
         loginButton.setEnabled(true);
     }
 
@@ -121,14 +118,14 @@ public class LoginActivity extends AppCompatActivity {
         String password = passwordText.getText().toString();
 
         if (name.isEmpty() || name.length() > 20) {
-            emailText.setError("Enter a valid email address");
+            emailText.setError(getString(R.string.enter_valid));
             valid = false;
         } else {
             emailText.setError(null);
         }
 
         if (password.isEmpty() || password.length() < 5 || password.length() > 120) {
-            passwordText.setError("Must be between 5 and 120 alphanumeric characters");
+            passwordText.setError(getString(R.string.must_be_between));
             valid = false;
         } else {
             passwordText.setError(null);
@@ -147,7 +144,7 @@ public class LoginActivity extends AppCompatActivity {
         }
         else {
             Toast.makeText(LoginActivity.this,
-                    "Press the back button again for exit", Toast.LENGTH_SHORT).show();
+                    getString(R.string.press_back), Toast.LENGTH_SHORT).show();
             Constants.backButtonCount++;
         }
     }
