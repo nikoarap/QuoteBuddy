@@ -66,10 +66,4 @@ public interface FetchJSONDataAPI {
             @Query("filter") String word
     );
 
-
-
-
-
-
-
 }

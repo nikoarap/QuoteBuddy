@@ -1,7 +1,6 @@
 package com.nikoarap.favqsapp.adapters;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,10 +9,8 @@ import android.widget.TextView;
 
 import com.nikoarap.favqsapp.R;
 import com.nikoarap.favqsapp.models.Quotes;
-import com.nikoarap.favqsapp.utils.VerticalSpacingDecorator;
 
 import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 //RecyclerfView Adapter for quoteList
@@ -23,7 +20,7 @@ public class QuotesAdapter extends RecyclerView.Adapter<QuotesAdapter.QuotesView
     private OnQuoteListener onQuoteListener;
     private static final String TAG = "AuthorsAdapter";
 
-    public QuotesAdapter(Quotes[] quotesList, OnQuoteListener quoteListener) {
+    QuotesAdapter(Quotes[] quotesList, OnQuoteListener quoteListener) {
         this.quotesList = quotesList;
         this.onQuoteListener = quoteListener;
     }
@@ -35,13 +32,11 @@ public class QuotesAdapter extends RecyclerView.Adapter<QuotesAdapter.QuotesView
         return new QuotesViewHolder(view,onQuoteListener);
     }
 
-
     @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull QuotesViewHolder viewHolder, int position) {
         viewHolder.quoteText.setText("“"+quotesList[position].getBody()+"”");
         viewHolder.authorText.setText("-"+quotesList[position].getAuthor());
-
     }
 
     @Override
@@ -52,7 +47,6 @@ public class QuotesAdapter extends RecyclerView.Adapter<QuotesAdapter.QuotesView
 
     //defines the UI and functionality of the recyclerView and its' listItems
     public class QuotesViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
-
         OnQuoteListener onQuoteListener;
         private TextView quoteText;
         private TextView authorText;
@@ -72,8 +66,7 @@ public class QuotesAdapter extends RecyclerView.Adapter<QuotesAdapter.QuotesView
         }
     }
 
-    public interface OnQuoteListener{
+    public interface OnQuoteListener {
         void onQuoteClick(int position);
     }
-
 }

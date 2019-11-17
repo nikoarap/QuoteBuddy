@@ -11,48 +11,48 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/widget_toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:background="#fff"
-        app:layout_scrollFlags="scroll|enterAlways">
-        
-        <androidx.appcompat.widget.SearchView
-            android:id="@+id/searchView"
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/widget_toolbar"
             android:layout_width="match_parent"
-            android:layout_height="?android:attr/actionBarSize"
-            app:queryHint="Search for Quotes">
-
-        </androidx.appcompat.widget.SearchView>
-
-
-    <RelativeLayout
-        android:id="@+id/relayout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <TextView
-            android:id="@+id/name"
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="17sp"
-            android:text=""
-            android:textColor="#000"
-            android:layout_centerHorizontal="true"
-            />
+            android:padding="10dp"
+            android:background="#fff"
+            app:layout_scrollFlags="scroll|enterAlways">
 
-    </RelativeLayout>
+            <androidx.appcompat.widget.SearchView
+                android:id="@+id/searchView"
+                android:layout_width="match_parent"
+                android:layout_height="?android:attr/actionBarSize"
+                app:queryHint="Search for Quotes">
 
-    </androidx.appcompat.widget.Toolbar>
+            </androidx.appcompat.widget.SearchView>
+
+
+            <RelativeLayout
+                android:id="@+id/relayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="17sp"
+                    android:text=""
+                    android:textColor="#000"
+                    android:layout_centerHorizontal="true"
+                    />
+
+            </RelativeLayout>
+
+        </androidx.appcompat.widget.Toolbar>
 
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/quotesRecyclerView"
+        android:id="@+id/quotesRecyclerView_search"
         android:orientation="vertical"
         android:layout_marginBottom="60dp"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">

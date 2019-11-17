@@ -20,7 +20,7 @@ public class PopulateRecyclerView extends RecyclerView {
         this.recView = recView;
     }
 
-    public void populate(Quotes[] quoteList,QuotesAdapter.OnQuoteListener quoteListener) {
+    public void populate(Quotes[] quoteList, QuotesAdapter.OnQuoteListener quoteListener) {
         RecyclerView.LayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         recView.setLayoutManager(linearLayoutManager);
         QuotesAdapter recAdapter = new QuotesAdapter(quoteList, quoteListener);
