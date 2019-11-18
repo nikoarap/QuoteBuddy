@@ -37,6 +37,10 @@ public class HomeFragment extends Fragment implements QuotesAdapter.OnQuoteListe
     private RecyclerView recView;
     private ArrayList<Quotes> quoteList = new ArrayList<>();
 
+    public HomeFragment(){
+
+    }
+
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_home, container, false);
         recView = root.findViewById(R.id.quotesRecyclerView);

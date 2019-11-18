@@ -13,43 +13,45 @@ import android.widget.Toast;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.nikoarap.favqsapp.R;
 import com.nikoarap.favqsapp.preferences.PrefsHelper;
+import com.nikoarap.favqsapp.ui.favourites.FavouritesFragment;
+import com.nikoarap.favqsapp.ui.home.HomeFragment;
+import com.nikoarap.favqsapp.ui.search.SearchFragment;
 import com.nikoarap.favqsapp.utils.Constants;
 
 import java.util.Objects;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
-public class UserMenuActivity extends AppCompatActivity {
+public class UserMenuActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener{
 
     private PrefsHelper prefsHelper = new PrefsHelper();
+     Fragment fragment1 = new HomeFragment();
+     Fragment fragment2 = new FavouritesFragment();
+     Fragment fragment3 = new SearchFragment();
+    final FragmentManager fm = getSupportFragmentManager();
+    Fragment active = fragment1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_menu);
         BottomNavigationView navView = findViewById(R.id.nav_view);
+        navView.setOnNavigationItemSelectedListener(this);
 
         //gets the saved user credentials(login, user-token) from SharedPreferences
         String loginResponse = prefsHelper.getStringfromPrefs(getString(R.string.loginResponse),UserMenuActivity.this);
 
         Objects.requireNonNull(UserMenuActivity.this.getSupportActionBar())
-                .setTitle(getString(R.string.welcome) + loginResponse);
+                .setTitle(loginResponse);
 
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
-        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.navigation_home, R.id.navigation_favourites, R.id.navigation_search)
-                .build();
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
-        NavigationUI.setupActionBarWithNavController(UserMenuActivity.this, navController, appBarConfiguration);
-        NavigationUI.setupWithNavController(navView, navController);
-
-
+        //adding instead of replacing fragments to backstack in order to keep their state intact
+        fm.beginTransaction().add(R.id.nav_host_fragment, fragment3, "3").hide(fragment3).commit();
+        fm.beginTransaction().add(R.id.nav_host_fragment, fragment2, "2").hide(fragment2).commit();
+        fm.beginTransaction().add(R.id.nav_host_fragment,fragment1, "1").commit();
     }
 
     //pressing the backButton twice exits the application
@@ -87,7 +89,7 @@ public class UserMenuActivity extends AppCompatActivity {
         this.setTheme(R.style.AlertDialogStyle);
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         LayoutInflater inflater = this.getLayoutInflater();
-         final View view = inflater.inflate(R.layout.logout_dialog_layout, null);
+        final View view = inflater.inflate(R.layout.logout_dialog_layout, null);
         builder.setView(view);
         builder.setPositiveButton(getString(R.string.ok), (dialog, which) -> {
             //deletes the user-token from the Shared Preferences, so that he stays logged out
@@ -98,6 +100,28 @@ public class UserMenuActivity extends AppCompatActivity {
         builder.setNegativeButton(getString(R.string.cancel), (dialog, which) -> {
         });
         builder.show();
+    }
+
+    //hiding the previous fragment and showing the one that is clicked
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+        switch (menuItem.getItemId()) {
+            case R.id.navigation_home:
+                fm.beginTransaction().hide(active).show(fragment1).commit();
+                active = fragment1;
+                return true;
+
+            case R.id.navigation_favourites:
+                fm.beginTransaction().hide(active).show(fragment2).commit();
+                active = fragment2;
+                return true;
+
+            case R.id.navigation_search:
+                fm.beginTransaction().hide(active).show(fragment3).commit();
+                active = fragment3;
+                return true;
+        }
+        return false;
     }
 
 }

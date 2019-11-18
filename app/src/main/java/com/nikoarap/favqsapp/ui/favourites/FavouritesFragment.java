@@ -36,6 +36,10 @@ public class FavouritesFragment extends Fragment implements QuotesAdapter.OnQuot
     private PopulateRecyclerView populateRecyclerView;
     private boolean observedOnce = false;
 
+    public FavouritesFragment(){
+
+    }
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_favourites, container, false);

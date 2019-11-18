@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.nikoarap.favqsapp.R;
 import com.nikoarap.favqsapp.adapters.QuotesAdapter;
@@ -25,6 +24,9 @@ public class SearchFragment extends Fragment implements QuotesAdapter.OnQuoteLis
     private RecyclerView recView;
     private SearchViewModel searchViewModel;
 
+    public SearchFragment(){
+    }
+
     // restores the state after screen rotation
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -32,14 +34,12 @@ public class SearchFragment extends Fragment implements QuotesAdapter.OnQuoteLis
         if (savedInstanceState != null) {
             //observes and gets the string (search query) from fragment's previous saved state
             ObserveQuery();
-        }else{
-            Toast.makeText(getActivity(), "state null", Toast.LENGTH_SHORT).show();
-
         }
     }
 
-
+    @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        super.onCreateView(inflater,container,savedInstanceState);
         searchViewModel = ViewModelProviders.of(this).get(SearchViewModel.class);
         View root = inflater.inflate(R.layout.fragment_search, container, false);
         SearchView searchView = root.findViewById(R.id.searchView);
@@ -48,7 +48,6 @@ public class SearchFragment extends Fragment implements QuotesAdapter.OnQuoteLis
         searchViewModel.initSearchView(searchView,recView,this);
         return root;
     }
-
 
     private void ObserveQuery(){
         searchViewModel.getText().observe(this, query ->
@@ -62,13 +61,4 @@ public class SearchFragment extends Fragment implements QuotesAdapter.OnQuoteLis
         i.putExtra(getString(R.string.quote), quoteList.get(position));
         startActivity(i);
     }
-
-//    //saves the state of the fragment
-//    @Override
-//    public void onSaveInstanceState(@NonNull Bundle outState) {
-//        super.onSaveInstanceState(outState);
-//        //here, the String of the search query is stored in Bundle to be used later
-//        outState.putString(getString(R.string.restoreKey), word);
-//    }
-
 }
