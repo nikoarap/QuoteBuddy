@@ -24,8 +24,7 @@ public class SearchFragment extends Fragment implements QuotesAdapter.OnQuoteLis
     private RecyclerView recView;
     private SearchViewModel searchViewModel;
 
-    public SearchFragment(){
-    }
+
 
     // restores the state after screen rotation
     @Override

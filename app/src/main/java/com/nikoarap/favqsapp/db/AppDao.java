@@ -2,8 +2,6 @@ package com.nikoarap.favqsapp.db;
 
 import com.nikoarap.favqsapp.models.Quotes;
 
-import java.util.List;
-
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
@@ -20,7 +18,7 @@ public interface AppDao {
 
     //delete favourited quotes from the db
     @Delete
-    void delete(Quotes... quote);
+    void deleteFavQuote(Quotes... quote);
 
     //select all favourited quotes from the db
     @Query("SELECT * FROM quotes")

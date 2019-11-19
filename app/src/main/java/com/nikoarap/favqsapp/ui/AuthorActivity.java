@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.widget.Toast;
 
 import com.nikoarap.favqsapp.R;
-import com.nikoarap.favqsapp.adapters.PopulateRecyclerView;
+import com.nikoarap.favqsapp.utils.PopulateRecyclerView;
 import com.nikoarap.favqsapp.adapters.QuotesAdapter;
 import com.nikoarap.favqsapp.api.FetchJSONDataAPI;
 import com.nikoarap.favqsapp.api.RetrofitRequestClass;

@@ -20,7 +20,7 @@ public class QuotesAdapter extends RecyclerView.Adapter<QuotesAdapter.QuotesView
     private OnQuoteListener onQuoteListener;
     private static final String TAG = "AuthorsAdapter";
 
-    QuotesAdapter(Quotes[] quotesList, OnQuoteListener quoteListener) {
+    public QuotesAdapter(Quotes[] quotesList, OnQuoteListener quoteListener) {
         this.quotesList = quotesList;
         this.onQuoteListener = quoteListener;
     }

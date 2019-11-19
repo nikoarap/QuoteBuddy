@@ -5,11 +5,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.widget.ToggleButton;
 
-import com.nikoarap.favqsapp.AsyncTasks.DeleteFavQuoteAsyncTask;
-import com.nikoarap.favqsapp.AsyncTasks.InsertFavQuoteAsyncTask;
+import com.nikoarap.favqsapp.handlers.DeleteFavQuoteHandler;
+import com.nikoarap.favqsapp.handlers.InsertFavQuoteHandler;
 import com.nikoarap.favqsapp.R;
 import com.nikoarap.favqsapp.db.AppDao;
 import com.nikoarap.favqsapp.db.AppDatabase;
@@ -73,13 +72,10 @@ public class QuoteActivity extends AppCompatActivity {
         //by favouriting a quote, it is stored in SQLite, by Unfavouriting it it is deleted
         btnFav.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if(isChecked) {
-                insertFavQuoteTask(quote);
-                Toast.makeText(QuoteActivity.this, R.string.quote_added, Toast.LENGTH_SHORT).show();
+                insertFavQuote(quote);
             }else{
                 deleteFavQuoteTask(quote);
-                Toast.makeText(QuoteActivity.this, R.string.quote_deleted, Toast.LENGTH_SHORT).show();
             }
-
         });
 
         //clicks on the Author Name Text View pass to an activity that displays quotes from this Author
@@ -96,16 +92,16 @@ public class QuoteActivity extends AppCompatActivity {
         int i;
         for(i = 0; i < quoteTags.length; i++ ){
             tagsTv.append("  "+quoteTags[i]);
-
         }
     }
 
-    private void insertFavQuoteTask(Quotes quote) {
-        new InsertFavQuoteAsyncTask(appDao).execute(quote);
+    private void insertFavQuote(Quotes favQuote) {
+        new InsertFavQuoteHandler(appDao,this).executeHandler(favQuote);
+
     }
 
-    private void deleteFavQuoteTask(Quotes quote) {
-        new DeleteFavQuoteAsyncTask(appDao).execute(quote);
+    private void deleteFavQuoteTask(Quotes favQuote) {
+        new DeleteFavQuoteHandler(appDao, this).executeHandler(favQuote);
     }
 
 

@@ -1,10 +1,10 @@
-package com.nikoarap.favqsapp.adapters;
+package com.nikoarap.favqsapp.utils;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
 
+import com.nikoarap.favqsapp.adapters.QuotesAdapter;
 import com.nikoarap.favqsapp.models.Quotes;
-import com.nikoarap.favqsapp.utils.VerticalSpacingDecorator;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;

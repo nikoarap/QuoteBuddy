@@ -15,7 +15,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 import com.nikoarap.favqsapp.R;
-import com.nikoarap.favqsapp.adapters.PopulateRecyclerView;
+import com.nikoarap.favqsapp.utils.PopulateRecyclerView;
 import com.nikoarap.favqsapp.adapters.QuotesAdapter;
 import com.nikoarap.favqsapp.api.FetchJSONDataAPI;
 import com.nikoarap.favqsapp.api.RetrofitRequestClass;
@@ -36,10 +36,6 @@ public class HomeFragment extends Fragment implements QuotesAdapter.OnQuoteListe
     private PopulateRecyclerView populateRecyclerView;
     private RecyclerView recView;
     private ArrayList<Quotes> quoteList = new ArrayList<>();
-
-    public HomeFragment(){
-
-    }
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_home, container, false);

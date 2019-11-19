@@ -25,22 +25,20 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.navigation.ui.AppBarConfiguration;
+import androidx.navigation.ui.NavigationUI;
 
-public class UserMenuActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener{
+public class UserMenuActivity extends AppCompatActivity {
 
     private PrefsHelper prefsHelper = new PrefsHelper();
-     Fragment fragment1 = new HomeFragment();
-     Fragment fragment2 = new FavouritesFragment();
-     Fragment fragment3 = new SearchFragment();
-    final FragmentManager fm = getSupportFragmentManager();
-    Fragment active = fragment1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_menu);
         BottomNavigationView navView = findViewById(R.id.nav_view);
-        navView.setOnNavigationItemSelectedListener(this);
 
         //gets the saved user credentials(login, user-token) from SharedPreferences
         String loginResponse = prefsHelper.getStringfromPrefs(getString(R.string.loginResponse),UserMenuActivity.this);
@@ -48,10 +46,17 @@ public class UserMenuActivity extends AppCompatActivity implements BottomNavigat
         Objects.requireNonNull(UserMenuActivity.this.getSupportActionBar())
                 .setTitle(loginResponse);
 
-        //adding instead of replacing fragments to backstack in order to keep their state intact
-        fm.beginTransaction().add(R.id.nav_host_fragment, fragment3, "3").hide(fragment3).commit();
-        fm.beginTransaction().add(R.id.nav_host_fragment, fragment2, "2").hide(fragment2).commit();
-        fm.beginTransaction().add(R.id.nav_host_fragment,fragment1, "1").commit();
+
+        // Passing each menu ID as a set of Ids because each
+        // menu should be considered as top level destinations.
+        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
+                R.id.navigation_home, R.id.navigation_favourites, R.id.navigation_search)
+                .build();
+        NavController navController = Navigation.findNavController(UserMenuActivity.this, R.id.nav_host_fragment);
+        NavigationUI.setupActionBarWithNavController(UserMenuActivity.this, navController, appBarConfiguration);
+        NavigationUI.setupWithNavController(navView, navController);
+
+
     }
 
     //pressing the backButton twice exits the application
@@ -100,28 +105,6 @@ public class UserMenuActivity extends AppCompatActivity implements BottomNavigat
         builder.setNegativeButton(getString(R.string.cancel), (dialog, which) -> {
         });
         builder.show();
-    }
-
-    //hiding the previous fragment and showing the one that is clicked
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-        switch (menuItem.getItemId()) {
-            case R.id.navigation_home:
-                fm.beginTransaction().hide(active).show(fragment1).commit();
-                active = fragment1;
-                return true;
-
-            case R.id.navigation_favourites:
-                fm.beginTransaction().hide(active).show(fragment2).commit();
-                active = fragment2;
-                return true;
-
-            case R.id.navigation_search:
-                fm.beginTransaction().hide(active).show(fragment3).commit();
-                active = fragment3;
-                return true;
-        }
-        return false;
     }
 
 }
