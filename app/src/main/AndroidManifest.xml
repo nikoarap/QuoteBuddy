@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.nikoarap.favqsapp">
+    package="com.nikoarap.quotebuddy">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -13,7 +13,7 @@
         android:theme="@style/AppTheme"
         android:fullBackupContent="true">
         <activity
-            android:name=".ui.SplashActivity"
+            android:name="com.nikoarap.quotebuddy.ui.SplashActivity"
             android:label="@string/app_name"
             android:launchMode="singleTop"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
@@ -26,7 +26,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.LoginActivity"
+            android:name="com.nikoarap.quotebuddy.ui.LoginActivity"
             android:launchMode="singleTop"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             android:windowSoftInputMode="stateHidden|adjustResize">
@@ -37,7 +37,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.SignupActivity"
+            android:name="com.nikoarap.quotebuddy.ui.SignupActivity"
             android:launchMode="singleTop"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             android:windowSoftInputMode="stateHidden|adjustResize">
@@ -48,7 +48,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.UserMenuActivity"
+            android:name="com.nikoarap.quotebuddy.ui.UserMenuActivity"
             android:launchMode="singleTop"
             android:windowSoftInputMode="stateHidden|adjustResize">
             <intent-filter>
@@ -58,7 +58,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.QuoteActivity"
+            android:name="com.nikoarap.quotebuddy.ui.QuoteActivity"
             android:launchMode="singleTop"
             android:windowSoftInputMode="stateHidden|adjustResize">
             <intent-filter>
@@ -68,7 +68,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.AuthorActivity"
+            android:name="com.nikoarap.quotebuddy.ui.AuthorActivity"
             android:launchMode="singleTop"
             android:windowSoftInputMode="stateHidden|adjustResize">
             <intent-filter>

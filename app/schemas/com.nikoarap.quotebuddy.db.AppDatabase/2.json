@@ -1,0 +1,94 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 2,
+    "identityHash": "06944ba9a21ca665964f2135fa93a5e2",
+    "entities": [
+      {
+        "tableName": "quotes",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`private` TEXT, `favorites_count` TEXT, `author` TEXT, `dialogue` TEXT, `upvotes_count` TEXT, `author_permalink` TEXT, `id` TEXT NOT NULL, `body` TEXT, `url` TEXT, `tags` TEXT, `downvotes_count` TEXT, PRIMARY KEY(`id`))",
+        "fields": [
+          {
+            "fieldPath": "_private",
+            "columnName": "private",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "favorites_count",
+            "columnName": "favorites_count",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "author",
+            "columnName": "author",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "dialogue",
+            "columnName": "dialogue",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "upvotes_count",
+            "columnName": "upvotes_count",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "author_permalink",
+            "columnName": "author_permalink",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "body",
+            "columnName": "body",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "url",
+            "columnName": "url",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "tags",
+            "columnName": "tags",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "downvotes_count",
+            "columnName": "downvotes_count",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
+      }
+    ],
+    "views": [],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '06944ba9a21ca665964f2135fa93a5e2')"
+    ]
+  }
+}
