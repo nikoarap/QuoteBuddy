@@ -8,7 +8,7 @@ import org.jetbrains.annotations.NotNull;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-//used for adding spaces between the list items in the RecyvlerView
+//used for adding spaces between the list items in the RecyclerView
 public class VerticalSpacingDecorator extends RecyclerView.ItemDecoration{
 
     private final int verticalSpaceHeight;
