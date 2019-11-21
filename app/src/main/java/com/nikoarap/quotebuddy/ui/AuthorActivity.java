@@ -11,6 +11,7 @@ import com.nikoarap.quotebuddy.api.FetchJSONDataAPI;
 import com.nikoarap.quotebuddy.api.RetrofitRequestClass;
 import com.nikoarap.quotebuddy.models.QuoteModel;
 import com.nikoarap.quotebuddy.models.Quotes;
+import com.nikoarap.quotebuddy.utils.VerticalSpacingDecorator;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -32,13 +33,14 @@ public class AuthorActivity extends AppCompatActivity implements QuotesAdapter.O
     private RecyclerView recView;
     private PopulateRecyclerView populateRecyclerView;
     public ArrayList<Quotes> quoteList = new ArrayList<>();
+    private VerticalSpacingDecorator itemDecorator = new VerticalSpacingDecorator(10);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.user_activity_layout);
         recView = findViewById(R.id.quotesRecyclerView);
-
+        recView.addItemDecoration(itemDecorator);
         ButterKnife.bind(this);
 
         //gets intent from previous activity along with the passed values
@@ -54,7 +56,6 @@ public class AuthorActivity extends AppCompatActivity implements QuotesAdapter.O
 
         //fetches the list of quotes by the corresponding Author
         fetchQuoteList(this);
-
     }
 
     private void fetchQuoteList(QuotesAdapter.OnQuoteListener quoteListener) {
@@ -94,5 +95,4 @@ public class AuthorActivity extends AppCompatActivity implements QuotesAdapter.O
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
-
 }

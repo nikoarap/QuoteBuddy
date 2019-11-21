@@ -24,11 +24,8 @@ public class PopulateRecyclerView extends RecyclerView {
         RecyclerView.LayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         recView.setLayoutManager(linearLayoutManager);
         QuotesAdapter recAdapter = new QuotesAdapter(quoteList, quoteListener);
-        VerticalSpacingDecorator itemDecorator = new VerticalSpacingDecorator(10);
-        recView.addItemDecoration(itemDecorator);
         recView.setAdapter(recAdapter);
         recAdapter.notifyDataSetChanged();
         recView.scheduleLayoutAnimation();
     }
-
 }

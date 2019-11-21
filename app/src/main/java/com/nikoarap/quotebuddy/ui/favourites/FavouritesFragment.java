@@ -35,14 +35,14 @@ public class FavouritesFragment extends Fragment implements QuotesAdapter.OnQuot
     private RecyclerView recView;
     private ArrayList<Quotes> quotesList = new ArrayList<>();
     private PopulateRecyclerView populateRecyclerView;
-    private boolean observedOnce = false;
+    private VerticalSpacingDecorator itemDecorator = new VerticalSpacingDecorator(10);
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_favourites, container, false);
         recView = root.findViewById(R.id.quotesRecyclerView);
         recView.setNestedScrollingEnabled(false);
-
+        recView.addItemDecoration(itemDecorator);
 
         //Initialize the db
         Context context = FavouritesFragment.this.getActivity();
@@ -69,23 +69,11 @@ public class FavouritesFragment extends Fragment implements QuotesAdapter.OnQuot
     private void observeFromDb(){
         appDao.getFavdQuotes().observe(this, (Quotes[] quotes) -> {
             if (quotes != null){
-                //checks if the UI is observed for changes
-                if(!observedOnce){
                     quotesList.addAll(Arrays.asList(quotes));
                     populateRecyclerView = new PopulateRecyclerView(Objects.requireNonNull(getActivity()),recView);
                     populateRecyclerView.populate(quotes,this);
                 }
-                else{
-                    quotesList.addAll(Arrays.asList(quotes));
-                    populateRecyclerView = new PopulateRecyclerView(Objects.requireNonNull(getActivity()),recView);
-                    populateRecyclerView.populate(quotes,this);
-                    //instantiating the decorator when the UI is observed more than once
-                    // to reset the verticalSpaceHieght value between the listItems
-                    VerticalSpacingDecorator itemDecorator = new VerticalSpacingDecorator(-10);
-                    recView.addItemDecoration(itemDecorator);
-                }
-            }
-            observedOnce = true;
+
         });
     }
 

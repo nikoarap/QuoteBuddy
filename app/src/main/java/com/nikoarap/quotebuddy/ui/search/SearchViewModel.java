@@ -1,7 +1,6 @@
 package com.nikoarap.quotebuddy.ui.search;
 
 import android.app.Application;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.nikoarap.quotebuddy.R;
@@ -36,14 +35,9 @@ public class SearchViewModel extends AndroidViewModel {
     private PopulateRecyclerView populateRecyclerView;
     private static ArrayList<Quotes> quoteList = new ArrayList<>();
 
-    private static final String TAG = "AAAAAAAAAAA";
-
-
-
     public SearchViewModel(@NonNull Application application) {
         super(application);
     }
-
 
     //gets quotes by user input in the Search Query
     void initSearchView(SearchView searchView, RecyclerView recyclerView, QuotesAdapter.OnQuoteListener quoteListener){
@@ -53,7 +47,9 @@ public class SearchViewModel extends AndroidViewModel {
                 word = query;
                 queryWord.postValue(word);
                 //fetches the quotes that match the query from the server
+
                 fetchQuoteList(word, recyclerView, quoteListener);
+
                 return false;
             }
             @Override
@@ -74,10 +70,10 @@ public class SearchViewModel extends AndroidViewModel {
                     quotes = quoteModel.getQuotes();
                     quoteList.clear();
                     quoteList.addAll(Arrays.asList(quotes));
+                    //removes everyhing from the recyclerView if no quotes were found
                     if (quoteList.get(0).getAuthor() == null) {
                         recView.removeAllViewsInLayout();
                         Toast.makeText(getApplication(), R.string.no_quotes_found, Toast.LENGTH_SHORT).show();
-                        Log.d(TAG, "onResponse: "+ response.body());
                     }
                     else{
                         populateRecyclerView = new PopulateRecyclerView(Objects.requireNonNull(getApplication()),recView);
@@ -93,7 +89,7 @@ public class SearchViewModel extends AndroidViewModel {
         });
     }
 
-    public LiveData<String> getText() {
+    LiveData<String> getText() {
         return queryWord;
     }
 

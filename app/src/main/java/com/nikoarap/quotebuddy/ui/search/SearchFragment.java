@@ -10,6 +10,7 @@ import com.nikoarap.quotebuddy.R;
 import com.nikoarap.quotebuddy.adapters.QuotesAdapter;
 import com.nikoarap.quotebuddy.models.Quotes;
 import com.nikoarap.quotebuddy.ui.QuoteActivity;
+import com.nikoarap.quotebuddy.utils.VerticalSpacingDecorator;
 
 import java.util.ArrayList;
 
@@ -23,8 +24,7 @@ public class SearchFragment extends Fragment implements QuotesAdapter.OnQuoteLis
 
     private RecyclerView recView;
     private SearchViewModel searchViewModel;
-
-
+    private VerticalSpacingDecorator itemDecorator = new VerticalSpacingDecorator(10);
 
     // restores the state after screen rotation
     @Override
@@ -43,6 +43,7 @@ public class SearchFragment extends Fragment implements QuotesAdapter.OnQuoteLis
         View root = inflater.inflate(R.layout.fragment_search, container, false);
         SearchView searchView = root.findViewById(R.id.searchView);
         recView = root.findViewById(R.id.quotesRecyclerView_search);
+        recView.addItemDecoration(itemDecorator);
         //initializes searchView from ViewModel
         searchViewModel.initSearchView(searchView,recView,this);
         return root;

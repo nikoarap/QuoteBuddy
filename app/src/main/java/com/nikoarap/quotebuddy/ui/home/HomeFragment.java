@@ -22,6 +22,7 @@ import com.nikoarap.quotebuddy.api.RetrofitRequestClass;
 import com.nikoarap.quotebuddy.models.QuoteModel;
 import com.nikoarap.quotebuddy.models.Quotes;
 import com.nikoarap.quotebuddy.ui.QuoteActivity;
+import com.nikoarap.quotebuddy.utils.VerticalSpacingDecorator;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -36,10 +37,12 @@ public class HomeFragment extends Fragment implements QuotesAdapter.OnQuoteListe
     private PopulateRecyclerView populateRecyclerView;
     private RecyclerView recView;
     private ArrayList<Quotes> quoteList = new ArrayList<>();
+    private VerticalSpacingDecorator itemDecorator = new VerticalSpacingDecorator(10);
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_home, container, false);
         recView = root.findViewById(R.id.quotesRecyclerView);
+        recView.addItemDecoration(itemDecorator);
 
         fetchQuoteList(this);
         return root;
