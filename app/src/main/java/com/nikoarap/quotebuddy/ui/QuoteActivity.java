@@ -97,7 +97,6 @@ public class QuoteActivity extends AppCompatActivity {
 
     private void insertFavQuote(Quotes favQuote) {
         new InsertFavQuoteHandler(appDao,this).executeHandler(favQuote);
-
     }
 
     private void deleteFavQuoteTask(Quotes favQuote) {
