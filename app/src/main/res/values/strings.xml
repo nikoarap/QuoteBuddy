@@ -44,4 +44,5 @@
     <string name="already_exists">Username or Email already exist</string>
     <string name="must_be_between_2">Must be between 1 and 20 alphanumeric characters</string>
     <string name="author">author</string>
+    <string name="asda">asda</string>
 </resources>

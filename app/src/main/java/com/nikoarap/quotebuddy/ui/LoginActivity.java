@@ -31,6 +31,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private PrefsHelper prefsHelper = new PrefsHelper();
 
+
     //bind all the viewObjects in ButterKnife
     @BindView(R.id.input_email) EditText emailText;
     @BindView(R.id.input_password) EditText passwordText;

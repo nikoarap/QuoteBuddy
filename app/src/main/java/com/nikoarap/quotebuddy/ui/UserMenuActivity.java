@@ -15,8 +15,6 @@ import com.nikoarap.quotebuddy.R;
 import com.nikoarap.quotebuddy.preferences.PrefsHelper;
 import com.nikoarap.quotebuddy.utils.Constants;
 
-import java.util.Objects;
-
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
@@ -27,6 +25,7 @@ import androidx.navigation.ui.NavigationUI;
 public class UserMenuActivity extends AppCompatActivity {
 
     private PrefsHelper prefsHelper = new PrefsHelper();
+    public static String loginResponse = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,11 +34,7 @@ public class UserMenuActivity extends AppCompatActivity {
         BottomNavigationView navView = findViewById(R.id.nav_view);
 
         //gets the saved user credentials(login, user-token) from SharedPreferences
-        String loginResponse = prefsHelper.getStringfromPrefs(getString(R.string.loginResponse),UserMenuActivity.this);
-
-        Objects.requireNonNull(UserMenuActivity.this.getSupportActionBar())
-                .setTitle(loginResponse);
-
+        loginResponse = prefsHelper.getStringfromPrefs(getString(R.string.loginResponse),UserMenuActivity.this);
 
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.

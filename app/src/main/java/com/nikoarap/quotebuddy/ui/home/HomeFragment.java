@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 import retrofit2.Call;
@@ -15,6 +16,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 import com.nikoarap.quotebuddy.R;
+import com.nikoarap.quotebuddy.ui.UserMenuActivity;
 import com.nikoarap.quotebuddy.utils.PopulateRecyclerView;
 import com.nikoarap.quotebuddy.adapters.QuotesAdapter;
 import com.nikoarap.quotebuddy.api.APIHandlingService;
@@ -39,10 +41,15 @@ public class HomeFragment extends Fragment implements QuotesAdapter.OnQuoteListe
     private ArrayList<Quotes> quoteList = new ArrayList<>();
     private VerticalSpacingDecorator itemDecorator = new VerticalSpacingDecorator(10);
 
+
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_home, container, false);
         recView = root.findViewById(R.id.quotesRecyclerView);
         recView.addItemDecoration(itemDecorator);
+
+        //sets the User name in the fragment's actionBar
+        Objects.requireNonNull(((AppCompatActivity) Objects.requireNonNull(getActivity())).
+                getSupportActionBar()).setTitle(UserMenuActivity.loginResponse);
 
         fetchQuoteList(this);
         return root;
