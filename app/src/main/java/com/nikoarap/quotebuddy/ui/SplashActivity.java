@@ -8,7 +8,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.nikoarap.quotebuddy.R;
-import com.nikoarap.quotebuddy.api.FetchJSONDataAPI;
+import com.nikoarap.quotebuddy.api.APIHandlingService;
 import com.nikoarap.quotebuddy.api.RetrofitRequestClass;
 import com.nikoarap.quotebuddy.models.QuoteModel;
 import com.nikoarap.quotebuddy.models.Quotes;
@@ -62,7 +62,7 @@ public class SplashActivity extends AppCompatActivity {
 
     //fetches a random quote from the server
     private void fetchRandomQuote() {
-        FetchJSONDataAPI service = RetrofitRequestClass.fetchApi();
+        APIHandlingService service = RetrofitRequestClass.fetchApi();
         Call<QuoteModel> call = service.getQuotesApi();
         call.enqueue(new Callback<QuoteModel>() {
             @SuppressLint("SetTextI18n")

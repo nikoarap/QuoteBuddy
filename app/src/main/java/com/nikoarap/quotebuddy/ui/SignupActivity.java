@@ -9,7 +9,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.nikoarap.quotebuddy.R;
-import com.nikoarap.quotebuddy.api.FetchJSONDataAPI;
+import com.nikoarap.quotebuddy.api.APIHandlingService;
 import com.nikoarap.quotebuddy.api.RetrofitRequestClass;
 import com.nikoarap.quotebuddy.models.signup.SignUpAuthorization;
 import com.nikoarap.quotebuddy.models.signup.User;
@@ -65,7 +65,7 @@ public class SignupActivity extends AppCompatActivity {
         String password = passwordText.getText().toString();
 
         //sending user credentials to the server db and gets the authentication back
-        FetchJSONDataAPI service = RetrofitRequestClass.fetchApi();
+        APIHandlingService service = RetrofitRequestClass.fetchApi();
         service.signUpAccount(new UserSignupSessionRequest(new User(name, email, password))).enqueue(new Callback<SignUpAuthorization>() {
             @Override
             public void onResponse(@NonNull Call<SignUpAuthorization> call, @NonNull Response<SignUpAuthorization> response) {

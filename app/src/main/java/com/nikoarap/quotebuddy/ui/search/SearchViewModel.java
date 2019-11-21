@@ -6,7 +6,7 @@ import android.widget.Toast;
 import com.nikoarap.quotebuddy.R;
 import com.nikoarap.quotebuddy.utils.PopulateRecyclerView;
 import com.nikoarap.quotebuddy.adapters.QuotesAdapter;
-import com.nikoarap.quotebuddy.api.FetchJSONDataAPI;
+import com.nikoarap.quotebuddy.api.APIHandlingService;
 import com.nikoarap.quotebuddy.api.RetrofitRequestClass;
 import com.nikoarap.quotebuddy.models.QuoteModel;
 import com.nikoarap.quotebuddy.models.Quotes;
@@ -60,7 +60,7 @@ public class SearchViewModel extends AndroidViewModel {
     }
 
     void fetchQuoteList(String query, RecyclerView recView, QuotesAdapter.OnQuoteListener quoteListener) {
-        FetchJSONDataAPI service = RetrofitRequestClass.fetchApi();
+        APIHandlingService service = RetrofitRequestClass.fetchApi();
         Call<QuoteModel> call = service.getQuotesByWord(query);
         call.enqueue(new Callback<QuoteModel>() {
             @Override

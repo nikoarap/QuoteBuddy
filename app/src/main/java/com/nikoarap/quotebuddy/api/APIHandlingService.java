@@ -13,7 +13,7 @@ import retrofit2.http.POST;
 import retrofit2.http.Query;
 
 //interface for server requests and API handling
-public interface FetchJSONDataAPI {
+public interface APIHandlingService {
 
     //get a random list of quotes
     @GET("quotes")

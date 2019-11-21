@@ -27,11 +27,11 @@ public class RetrofitRequestClass {
 
     private static Retrofit retrofit = retrofitBuilder.build();
 
-    private static FetchJSONDataAPI fetchJSONDataAPI = retrofit.create(FetchJSONDataAPI.class);
+    private static APIHandlingService APIHandlingService = retrofit.create(APIHandlingService.class);
 
     //request interface
-    public static FetchJSONDataAPI fetchApi() {
-        return fetchJSONDataAPI;
+    public static APIHandlingService fetchApi() {
+        return APIHandlingService;
     }
 
 }

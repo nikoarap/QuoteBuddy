@@ -7,7 +7,7 @@ import android.widget.Toast;
 import com.nikoarap.quotebuddy.R;
 import com.nikoarap.quotebuddy.utils.PopulateRecyclerView;
 import com.nikoarap.quotebuddy.adapters.QuotesAdapter;
-import com.nikoarap.quotebuddy.api.FetchJSONDataAPI;
+import com.nikoarap.quotebuddy.api.APIHandlingService;
 import com.nikoarap.quotebuddy.api.RetrofitRequestClass;
 import com.nikoarap.quotebuddy.models.QuoteModel;
 import com.nikoarap.quotebuddy.models.Quotes;
@@ -59,7 +59,7 @@ public class AuthorActivity extends AppCompatActivity implements QuotesAdapter.O
     }
 
     private void fetchQuoteList(QuotesAdapter.OnQuoteListener quoteListener) {
-        FetchJSONDataAPI service = RetrofitRequestClass.fetchApi();
+        APIHandlingService service = RetrofitRequestClass.fetchApi();
         Call<QuoteModel> call = service.getQuotesByAuthor(quoteAuthor_2,"&",getString(R.string.author));
         call.enqueue(new Callback<QuoteModel>() {
             @Override

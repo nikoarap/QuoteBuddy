@@ -18,7 +18,7 @@ import retrofit2.Response;
 
 
 import com.nikoarap.quotebuddy.R;
-import com.nikoarap.quotebuddy.api.FetchJSONDataAPI;
+import com.nikoarap.quotebuddy.api.APIHandlingService;
 import com.nikoarap.quotebuddy.api.RetrofitRequestClass;
 import com.nikoarap.quotebuddy.models.login.LoginAuthorization;
 import com.nikoarap.quotebuddy.models.login.UserLoginSessionRequest;
@@ -71,7 +71,7 @@ public class LoginActivity extends AppCompatActivity {
         String password = passwordText.getText().toString();
 
         //sending user credentials to the server db and gets the authentication back
-        FetchJSONDataAPI service = RetrofitRequestClass.fetchApi();
+        APIHandlingService service = RetrofitRequestClass.fetchApi();
         service.loginAccount(new UserLoginSessionRequest(new User(email, password))).enqueue(new Callback<LoginAuthorization>() {
             @Override
             public void onResponse(@NonNull Call<LoginAuthorization> call, @NonNull Response<LoginAuthorization> response) {
